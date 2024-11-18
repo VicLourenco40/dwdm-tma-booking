@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 type Hotel = {
   id: string;
@@ -36,7 +37,9 @@ export default function Hotels() {
         <tbody>
           {hotels.map(hotel => (
             <tr key={hotel.id}>
-              <td>{hotel.name}</td>
+              <td>
+                <Link to={`/hotels/${hotel.id}`}>{hotel.name}</Link>
+              </td>
               <td>{hotel.location}</td>
               <td>{hotel.country.name}</td>
               <td>{hotel.averageReview}</td>

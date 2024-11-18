@@ -6,6 +6,7 @@ import './index.css';
 import Root from './routes/root';
 import Home from './routes/home';
 import Hotels from './routes/hotels';
+import Hotel from './routes/hotel';
 
 const router = createBrowserRouter([{
   path: '/',
@@ -18,6 +19,10 @@ const router = createBrowserRouter([{
     {
       path: 'hotels',
       element: <Hotels />
+    },
+    {
+      path: 'hotels/:hotelId',
+      element: <Hotel />
     }
   ]
 }]);
