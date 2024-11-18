@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  border-bottom: 1px solid;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header ul {
+  display: flex;
+  gap: 1rem;
+  list-style-type: none;
+}
+
+main {
+  flex: 1;
+  padding: 1rem;
+}
+
+footer {
+  border-top: 1px solid;
+  text-align: center;
+  padding: 1rem;
+}
