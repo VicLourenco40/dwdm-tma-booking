@@ -12,7 +12,7 @@ export default function Root() {
         <h1>Root</h1>
       </main>
       <footer>
-        2024 booking
+        2024 Booking
       </footer>
     </>
   );
