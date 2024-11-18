@@ -6,8 +6,8 @@ export default function Root() {
       <header>
         <h2>Booking</h2>
         <ul>
-          <Link to={'/'}>Home</Link>
-          <li>Hotels</li>
+          <li><Link to={'/'}>Home</Link></li>
+          <li><Link to={'hotels'}>Hotels</Link></li>
         </ul>
       </header>
       <main>
