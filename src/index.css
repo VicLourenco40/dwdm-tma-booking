@@ -38,8 +38,23 @@ main {
   padding: 1rem;
 }
 
+h1 {
+  margin-bottom: 1rem;
+}
+
+table {
+  border: 1px solid;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  border-bottom: 1px solid;
+  padding: 0.5rem;
+}
+
 footer {
-  border-top: 1px solid;
   text-align: center;
+  border-top: 1px solid;
   padding: 1rem;
 }
