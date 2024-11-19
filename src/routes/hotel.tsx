@@ -15,6 +15,22 @@ type Hotel = {
       id: string;
       name: string;
     }
+  ];
+  reviews: [
+    {
+      id: string;
+      rating: number;
+      comment: string;
+      createdAt: string;
+      booking: {
+        user: {
+          name: string;
+          country: {
+            name: string;
+          }
+        }
+      }
+    }
   ]
   averageRating: number;
 };
@@ -64,6 +80,29 @@ export default function Hotel() {
               <li key={amenity.id}>{amenity.name}</li>
             ))}
           </ul>
+          <h2>Reviews</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Country</th>
+                <th>Posted</th>
+                <th>Rating</th>
+                <th>Comment</th>
+              </tr>
+            </thead>
+            <tbody>
+              {hotel.reviews.map(review => (
+                <tr key={review.id}>
+                  <td>{review.booking.user.name}</td>
+                  <td>{review.booking.user.country.name}</td>
+                  <td>{review.createdAt.split('T')[0]}</td>
+                  <td>{review.rating}</td>
+                  <td>{review.comment}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </>
       ) : (
         <p>Loading...</p>
