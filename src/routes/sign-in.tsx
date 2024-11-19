@@ -1,4 +1,5 @@
 import { FormEvent, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 type User = {
   email: string;
@@ -69,6 +70,7 @@ export default function SignIn() {
         <input type='submit' value='Sign In' />
       </form>
       {error && <p>{error}</p>}
+      <Link to={'/sign-up'}>Sign Up</Link>
     </>
   );
 }

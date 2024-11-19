@@ -1,4 +1,5 @@
 import { FormEvent, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 type Country = {
   id: string;
@@ -143,6 +144,7 @@ export default function SignUp() {
         <input type='submit' value='Sign Up' />
       </form>
       {error && <p>{error}</p>}
+      <Link to={'/sign-in'}>Sign In</Link>
     </>
   );
 }
