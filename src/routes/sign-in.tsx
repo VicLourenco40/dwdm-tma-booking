@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 type User = {
   email: string;
@@ -26,11 +26,14 @@ export default function SignIn() {
 
       if (response.status === 201) {
         localStorage.setItem('token', data.token);
+        navigate('/user');
       } else {
         setError(data.message);
       }
     });
   }
+
+  const navigate = useNavigate();
 
   const [user, setUser] = useState<User>({
     email: '',

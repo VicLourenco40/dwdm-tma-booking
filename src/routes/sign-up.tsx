@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 type Country = {
   id: string;
@@ -45,11 +45,14 @@ export default function SignUp() {
 
       if (response.status === 201) {
         localStorage.setItem('token', data.token);
+        navigate('/user');
       } else {
         setError(data.message);
       }
     });
   }
+
+  const navigate = useNavigate();
 
   const [countries, setCountries] = useState<Country[]>([]);
 
