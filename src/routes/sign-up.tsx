@@ -9,8 +9,8 @@ type User = {
   name: string;
   email: string;
   password: string;
-  birthDate: string;
-  countryId: string;
+  birth_date: string;
+  country_id: string;
   terms: boolean;
 }
 
@@ -27,6 +27,25 @@ export default function SignUp() {
 
   async function handleSignUp(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    await fetch('https://api-tma-2024-production.up.railway.app/sign-up', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+    .then(async response => ({
+      response,
+      data: await response.json()
+    }))
+    .then(({response, data}) => {
+      console.log(data);
+
+      if (response.status === 201) {
+        localStorage.setItem('token', data.token);
+      }
+    });
   }
 
   const [countries, setCountries] = useState<Country[]>([]);
@@ -35,8 +54,8 @@ export default function SignUp() {
     name: '',
     email: '',
     password: '',
-    birthDate: '',
-    countryId: '',
+    birth_date: '',
+    country_id: '',
     terms: false
   });
 
@@ -87,7 +106,7 @@ export default function SignUp() {
           id='birth-date'
           required
           onChange={event => (
-            setUser(user => ({...user, birthDate: event.target.value}))
+            setUser(user => ({...user, birth_date: event.target.value}))
           )}
         />
 
@@ -97,7 +116,7 @@ export default function SignUp() {
           id='country'
           required
           onChange={event => (
-            setUser(user => ({...user, countryId: event.target.value}))
+            setUser(user => ({...user, country_id: event.target.value}))
           )}
         >
           <option value=''>Select</option>
