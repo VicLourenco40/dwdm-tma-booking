@@ -7,6 +7,7 @@ import Root from './routes/root';
 import Home from './routes/home';
 import Hotels from './routes/hotels';
 import Hotel from './routes/hotel';
+import SignUp from './routes/sign-up';
 
 const router = createBrowserRouter([{
   path: '/',
@@ -17,12 +18,16 @@ const router = createBrowserRouter([{
       element: <Home />
     },
     {
-      path: 'hotels',
+      path: '/hotels',
       element: <Hotels />
     },
     {
-      path: 'hotels/:hotelId',
+      path: '/hotels/:hotelId',
       element: <Hotel />
+    },
+    {
+      path: '/sign-up',
+      element: <SignUp />
     }
   ]
 }]);
