@@ -9,11 +9,13 @@ type Hotel = {
   country: {
     name: string;
   };
-  rooms: [
+  rooms: [];
+  amenities: [
     {
       id: string;
+      name: string;
     }
-  ];
+  ]
   averageRating: number;
 };
 
@@ -56,6 +58,12 @@ export default function Hotel() {
             </tbody>
           </table>
           <p>{hotel.description}</p>
+          <h2>Amenities</h2>
+          <ul>
+            {hotel.amenities.map(amenity => (
+              <li key={amenity.id}>{amenity.name}</li>
+            ))}
+          </ul>
         </>
       ) : (
         <p>Loading...</p>
