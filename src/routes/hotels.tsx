@@ -29,10 +29,12 @@ export default function Hotels() {
       <h1>Hotels</h1>
       <table>
         <thead>
-          <th>Name</th>
-          <th>Location</th>
-          <th>Country</th>
-          <th>Rating</th>
+          <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Country</th>
+            <th>Rating</th>
+          </tr>
         </thead>
         <tbody>
           {hotels.map(hotel => (
