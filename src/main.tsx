@@ -7,6 +7,7 @@ import Root from './routes/root';
 import Home from './routes/home';
 import Hotels from './routes/hotels';
 import Hotel from './routes/hotel';
+import User from './routes/user';
 import SignUp from './routes/sign-up';
 import SignIn from './routes/sign-in';
 
@@ -25,6 +26,10 @@ const router = createBrowserRouter([{
     {
       path: '/hotels/:hotelId',
       element: <Hotel />
+    },
+    {
+      path: '/user',
+      element: <User />
     },
     {
       path: '/sign-up',
