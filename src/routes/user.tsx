@@ -50,7 +50,29 @@ export default function User() {
 
   return (
     <>
-      <h1>User</h1>
+      {user ? (
+        <>
+          <h1>{user.name}</h1>
+          <table>
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th>Country</th>
+                <th>Birthdate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{user.email}</td>
+                <td>{user.country.name}</td>
+                <td>{user.birthDate.split('T')[0]}</td>
+              </tr>
+            </tbody>
+          </table>
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
     </>
   );
 }
