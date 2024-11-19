@@ -53,6 +53,12 @@ th, td {
   padding: 0.5rem;
 }
 
+p {
+  border: 1px solid;
+  padding: 0.5rem;
+  max-width: 512px;
+}
+
 footer {
   text-align: center;
   border-top: 1px solid;
