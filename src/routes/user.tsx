@@ -42,6 +42,11 @@ export default function User() {
     });
   }
 
+  function handleSignOut() {
+    localStorage.removeItem('token');
+    navigate('/sign-in');
+  }
+
   const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
@@ -69,6 +74,7 @@ export default function User() {
               </tr>
             </tbody>
           </table>
+          <button onClick={handleSignOut}>Sign Out</button>
         </>
       ) : (
         <p>Loading...</p>
