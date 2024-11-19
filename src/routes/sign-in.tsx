@@ -8,6 +8,25 @@ type User = {
 export default function SignIn() {
   async function handleSignIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    await fetch('https://api-tma-2024-production.up.railway.app/sign-in', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+    .then(async response => ({
+      response,
+      data: await response.json()
+    }))
+    .then(({response, data}) => {
+      console.log(data);
+
+      if (response.status === 201) {
+        localStorage.setItem('token', data.token);
+      }
+    });
   }
 
   const [user, setUser] = useState<User>({
