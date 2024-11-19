@@ -44,6 +44,8 @@ export default function SignUp() {
 
       if (response.status === 201) {
         localStorage.setItem('token', data.token);
+      } else {
+        setError(data.message);
       }
     });
   }
@@ -58,6 +60,8 @@ export default function SignUp() {
     country_id: '',
     terms: false
   });
+
+  const [error, setError] = useState('');
 
   return (
     <>
@@ -138,6 +142,7 @@ export default function SignUp() {
 
         <input type='submit' value='Sign Up' />
       </form>
+      {error && <p>{error}</p>}
     </>
   );
 }
