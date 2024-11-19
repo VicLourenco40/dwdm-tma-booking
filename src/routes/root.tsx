@@ -9,6 +9,7 @@ export default function Root() {
           <li><Link to={'/'}>Home</Link></li>
           <li><Link to={'/hotels'}>Hotels</Link></li>
           <li><Link to={'/sign-up'}>Sign Up</Link></li>
+          <li><Link to={'/sign-in'}>Sign In</Link></li>
         </ul>
       </header>
       <main>

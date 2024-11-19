@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from 'react';
 
 type Country = {
   id: string;
@@ -125,18 +125,18 @@ export default function SignUp() {
           ))}
         </select>
 
-        <label htmlFor="terms">Terms and conditions</label>
+        <label htmlFor='terms'>Terms and conditions</label>
         <input
-          type="checkbox"
-          name="terms"
-          id="terms"
+          type='checkbox'
+          name='terms'
+          id='terms'
           required
           onChange={event => (
             setUser(user => ({...user, terms: event.target.value === 'on'}))
           )}
         />
 
-        <input type="submit" value="Sign Up" />
+        <input type='submit' value='Sign Up' />
       </form>
     </>
   );

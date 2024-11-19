@@ -8,6 +8,7 @@ import Home from './routes/home';
 import Hotels from './routes/hotels';
 import Hotel from './routes/hotel';
 import SignUp from './routes/sign-up';
+import SignIn from './routes/sign-in';
 
 const router = createBrowserRouter([{
   path: '/',
@@ -28,6 +29,10 @@ const router = createBrowserRouter([{
     {
       path: '/sign-up',
       element: <SignUp />
+    },
+    {
+      path: '/sign-in',
+      element: <SignIn />
     }
   ]
 }]);
