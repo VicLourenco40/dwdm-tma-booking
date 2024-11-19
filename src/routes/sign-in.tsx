@@ -25,6 +25,8 @@ export default function SignIn() {
 
       if (response.status === 201) {
         localStorage.setItem('token', data.token);
+      } else {
+        setError(data.message);
       }
     });
   }
@@ -33,6 +35,8 @@ export default function SignIn() {
     email: '',
     password: ''
   });
+
+  const [error, setError] = useState('');
 
   return (
     <>
@@ -64,6 +68,7 @@ export default function SignIn() {
 
         <input type='submit' value='Sign In' />
       </form>
+      {error && <p>{error}</p>}
     </>
   );
 }
