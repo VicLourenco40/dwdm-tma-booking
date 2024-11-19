@@ -24,19 +24,19 @@ export default function SignUp() {
 
       <form>
         <label htmlFor='name'>Name</label>
-        <input type='text' name='name' id='name' />
+        <input type='text' name='name' id='name' minLength={3} required />
 
         <label htmlFor='email'>Email</label>
-        <input type='email' name='email' id='email' />
+        <input type='email' name='email' id='email' required />
 
         <label htmlFor='password'>Password</label>
-        <input type='password' name='password' id='password' />
+        <input type='password' name='password' id='password' minLength={6} required />
 
         <label htmlFor='birth-date'>Birth date</label>
-        <input type='date' name='birth-date' id='birth-date' />
+        <input type='date' name='birth-date' id='birth-date' required />
 
         <label htmlFor='country'>Country</label>
-        <select name='country' id='country'>
+        <select name='country' id='country' required>
           <option value=''>Select</option>
           {countries.map(country => (
             <option key={country.id} value={country.id}>{country.name}</option>
@@ -44,7 +44,7 @@ export default function SignUp() {
         </select>
 
         <label htmlFor="terms">Terms and conditions</label>
-        <input type="checkbox" name="terms" id="terms" />
+        <input type="checkbox" name="terms" id="terms" required />
 
         <input type="submit" value="Sign Up" />
       </form>
