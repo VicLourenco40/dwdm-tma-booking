@@ -9,29 +9,30 @@ type Hotel = {
   country: {
     name: string;
   };
-  rooms: [];
-  amenities: [
-    {
+  rooms: [{
+    images: [{
       id: string;
-      name: string;
-    }
-  ];
-  reviews: [
-    {
-      id: string;
-      rating: number;
-      comment: string;
-      createdAt: string;
-      booking: {
-        user: {
+      url: string;
+    }]
+  }];
+  amenities: [{
+    id: string;
+    name: string;
+  }];
+  reviews: [{
+    id: string;
+    rating: number;
+    comment: string;
+    createdAt: string;
+    booking: {
+      user: {
+        name: string;
+        country: {
           name: string;
-          country: {
-            name: string;
-          }
         }
       }
     }
-  ]
+  }]
   averageRating: number;
 };
 
@@ -74,6 +75,14 @@ export default function Hotel() {
             </tbody>
           </table>
           <p>{hotel.description}</p>
+          <h2>Gallery</h2>
+          <div className="gallery">
+            {hotel.rooms.map(room => (
+              room.images.map(image => (
+                <img key={image.id} src={image.url} />
+              )))
+            )}
+          </div>
           <h2>Amenities</h2>
           <ul>
             {hotel.amenities.map(amenity => (

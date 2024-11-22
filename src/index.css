@@ -69,6 +69,18 @@ input, select {
   margin-bottom: 0.5rem;
 }
 
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+img {
+  border: 1px solid;
+  width: auto;
+  height: 320px;
+}
+
 footer {
   text-align: center;
   border-top: 1px solid;
