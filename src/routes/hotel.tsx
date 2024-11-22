@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 type Hotel = {
   id: string;
@@ -43,10 +43,16 @@ export default function Hotel() {
 
   const { hotelId } = useParams();
 
+  const navigate = useNavigate();
+
   async function getHotel() {
     await fetch(`https://api-tma-2024-production.up.railway.app/hotels/${hotelId}`)
       .then(async response => await response.json())
       .then(data => setHotel(data.hotel));
+  }
+
+  function handleBookRoom() {
+    navigate(`/booking/${hotelId}`);
   }
 
   const [hotel, setHotel] = useState<Hotel | null>(null);
@@ -75,8 +81,9 @@ export default function Hotel() {
             </tbody>
           </table>
           <p>{hotel.description}</p>
+          <button onClick={handleBookRoom}>Book room</button>
           <h2>Gallery</h2>
-          <div className="gallery">
+          <div className='gallery'>
             {hotel.rooms.map(room => (
               room.images.map(image => (
                 <img key={image.id} src={image.url} />
@@ -89,6 +96,7 @@ export default function Hotel() {
               <li key={amenity.id}>{amenity.name}</li>
             ))}
           </ul>
+          <button onClick={handleBookRoom}>Book room</button>
           <h2>Reviews</h2>
           <table>
             <thead>
