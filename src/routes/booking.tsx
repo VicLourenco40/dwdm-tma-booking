@@ -6,7 +6,7 @@ type Hotel = {
   name: string;
   cancellationPolicy: {
     name: string;
-  }
+  };
   rooms: [{
     id: string;
     type: string;
@@ -14,8 +14,8 @@ type Hotel = {
     images: [{
       id: string;
       url: string;
-    }]
-  }]
+    }];
+  }];
 }
 
 type Booking = {
@@ -37,7 +37,38 @@ export default function Booking() {
 
   async function handleBookRoom(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    await fetch('https://api-tma-2024-production.up.railway.app/booking', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(booking)
+    })
+    .then(async response => ({
+      response,
+      data: await response.json()
+    }))
+    .then(({response, data}) => {
+      console.log(data);
+
+      setMessage(data.message);
+    })
   }
+
+  function getNextDay(day: string) {
+    let nextDay = new Date(day);
+
+    nextDay.setDate(nextDay.getDate() + 1);
+
+    return nextDay.toISOString().slice(0, 10);
+  }
+
+  const token = localStorage.getItem('token');
+
+  const today = new Date().toISOString().slice(0, 10);
+  const tomorrow = getNextDay(today);
 
   const { hotelId } = useParams();
 
@@ -49,7 +80,15 @@ export default function Booking() {
     endDate: ''
   });
 
-  if (!hotel) return (<></>);
+  const [ message, setMessage ] = useState('');
+
+  const [ minEndDate, setMinEndDate ] = useState(getNextDay(tomorrow));
+
+  if (!hotel) return (
+    <>
+      <p>Loading...</p>
+    </>
+  );
 
   return (
     <>
@@ -61,13 +100,14 @@ export default function Booking() {
         <select
           name='room'
           id='room'
-          onChange={event => (
-            setBooking({...booking, roomId: event.target.value})
-          )}
+          required
+          onChange={event => {
+            setBooking({...booking, roomId: event.target.value});
+          }}
         >
           <option value=''>Select</option>
           {hotel.rooms.map(room => (
-            <option value={room.id}>{room.type}</option>
+            <option key={room.id} value={room.id}>{room.type}</option>
           ))}
         </select>
         <label htmlFor='start-date'>Start date</label>
@@ -75,8 +115,11 @@ export default function Booking() {
           type='date'
           name='start-date'
           id='start-date'
+          min={tomorrow}
+          required
           onChange={event => {
-            setBooking({...booking, startDate: event.target.value})
+            setBooking({...booking, startDate: event.target.value});
+            setMinEndDate(getNextDay(event.target.value));
           }}
         />
         <label htmlFor='start-date'>End date</label>
@@ -84,12 +127,15 @@ export default function Booking() {
           type='date'
           name='end-date'
           id='end-date'
+          min={minEndDate}
+          required
           onChange={event => {
             setBooking({...booking, endDate: event.target.value})
           }}
         />
         <input type='submit' value='Book room' />
       </form>
+      {message && <p>{message}</p>}
     </>
   );
 }
