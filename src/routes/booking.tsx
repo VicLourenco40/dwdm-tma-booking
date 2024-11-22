@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 type Hotel = {
   id: string;
@@ -26,7 +26,11 @@ type Booking = {
 
 export default function Booking() {
   useEffect(() => {
-    getHotel();
+    if (token) {
+      getHotel();
+    } else {
+      navigate('/sign-in');
+    }
   }, []);
 
   async function getHotel() {
@@ -64,6 +68,8 @@ export default function Booking() {
 
     return nextDay.toISOString().slice(0, 10);
   }
+
+  const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
 
