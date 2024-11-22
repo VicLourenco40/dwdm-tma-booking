@@ -18,6 +18,12 @@ type Hotel = {
   }]
 }
 
+type Booking = {
+  roomId: string;
+  startDate: string;
+  endDate: string;
+}
+
 export default function Booking() {
   useEffect(() => {
     getHotel();
@@ -37,6 +43,12 @@ export default function Booking() {
 
   const [ hotel, setHotel ] = useState<Hotel | null>(null);
 
+  const [ booking, setBooking ] = useState<Booking>({
+    roomId: '',
+    startDate: '',
+    endDate: ''
+  });
+
   if (!hotel) return (<></>);
 
   return (
@@ -46,16 +58,36 @@ export default function Booking() {
       <p>{hotel.cancellationPolicy.name}</p>
       <form onSubmit={handleBookRoom}>
         <label htmlFor='room'>Room</label>
-        <select name='room' id='room'>
+        <select
+          name='room'
+          id='room'
+          onChange={event => (
+            setBooking({...booking, roomId: event.target.value})
+          )}
+        >
           <option value=''>Select</option>
           {hotel.rooms.map(room => (
             <option value={room.id}>{room.type}</option>
           ))}
         </select>
         <label htmlFor='start-date'>Start date</label>
-        <input type='date' name='start-date' id='start-date' />
+        <input
+          type='date'
+          name='start-date'
+          id='start-date'
+          onChange={event => {
+            setBooking({...booking, startDate: event.target.value})
+          }}
+        />
         <label htmlFor='start-date'>End date</label>
-        <input type='date' name='end-date' id='end-date' />
+        <input
+          type='date'
+          name='end-date'
+          id='end-date'
+          onChange={event => {
+            setBooking({...booking, endDate: event.target.value})
+          }}
+        />
         <input type='submit' value='Book room' />
       </form>
     </>
