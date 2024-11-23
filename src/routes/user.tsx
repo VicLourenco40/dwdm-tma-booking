@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 type User = {
   id: string;
@@ -18,6 +18,7 @@ type Booking = {
   room: {
     type: string;
     hotel: {
+      id: string;
       name: string;
     };
   };
@@ -95,7 +96,7 @@ export default function User() {
 
   const [user, setUser] = useState<User | null>(null);
 
-  const [ bookings, setBookings ] = useState<Booking[]>([]);
+  const [bookings, setBookings] = useState<Booking[]>([]);
 
   const [email, setEmail] = useState('');
 
@@ -161,7 +162,7 @@ export default function User() {
         <tbody>
           {bookings.map(booking => (
             <tr key={booking.id}>
-              <td>{booking.room.hotel.name}</td>
+              <td><Link to={`/hotels/${booking.room.hotel.id}`}>{booking.room.hotel.name}</Link></td>
               <td>{booking.room.type}</td>
               <td>{booking.checkIn.split('T')[0]}</td>
               <td>{booking.checkOut.split('T')[0]}</td>
