@@ -22,6 +22,14 @@ type Booking = {
       name: string;
     };
   };
+  reviews: Review[];
+};
+
+type Review = {
+  id: string;
+  bookingId: string;
+  rating: number;
+  comment: string;
 };
 
 export default function User() {
@@ -157,6 +165,7 @@ export default function User() {
             <th>Room</th>
             <th>Check-in</th>
             <th>Check-out</th>
+            <th>Review</th>
           </tr>
         </thead>
         <tbody>
@@ -166,6 +175,11 @@ export default function User() {
               <td>{booking.room.type}</td>
               <td>{booking.checkIn.split('T')[0]}</td>
               <td>{booking.checkOut.split('T')[0]}</td>
+              <td>
+                <button onClick={() => navigate(`/review/${booking.id}`)}>
+                  {booking.reviews[0] ? 'Update Review' : 'Create review'}
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
