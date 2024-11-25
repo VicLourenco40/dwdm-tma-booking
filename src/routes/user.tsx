@@ -98,6 +98,26 @@ export default function User() {
     navigate('/sign-in');
   }
 
+  async function handleDeleteReview(id: string) {
+    await fetch(`https://api-tma-2024-production.up.railway.app/review/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(async response => ({
+      response,
+      data: await response.json()
+    }))
+    .then(({response, data}) => {
+      console.log(data);
+
+      if (response.status === 201) {
+        getUser();
+      }
+    });
+  }
+
   const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
@@ -179,6 +199,11 @@ export default function User() {
                 <button onClick={() => navigate(`/review/${booking.id}`)}>
                   {booking.reviews[0] ? 'Update Review' : 'Create review'}
                 </button>
+                {booking.reviews[0] && (
+                  <button onClick={() => handleDeleteReview(booking.reviews[0].id)}>
+                    Delete review
+                  </button>
+                )}
               </td>
             </tr>
           ))}
