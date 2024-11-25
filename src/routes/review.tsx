@@ -69,6 +69,27 @@ export default function Review() {
           </tr>
         </tbody>
       </table>
+      <h2>Review</h2>
+      <form>
+        <label htmlFor='rating'>Rating</label>
+        <input
+          type='number'
+          name='rating'
+          id='rating'
+          min={1}
+          max={5}
+          required
+        />
+        <label htmlFor='comment'>Comment</label>
+        <textarea
+          name='comment'
+          id='comment'
+          rows={5}
+          cols={50}
+          minLength={10}
+        />
+        <input type='submit' value='Post review' />
+      </form>
     </>
   );
 }
