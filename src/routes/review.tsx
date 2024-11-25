@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { FormEvent, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 type Booking = {
   id: string;
@@ -11,6 +11,12 @@ type Booking = {
       name: string;
     };
   };
+};
+
+type Review = {
+  bookingId: string;
+  rating: number;
+  comment?: string;
 };
 
 export default function Review() {
@@ -39,11 +45,40 @@ export default function Review() {
     });
   }
 
+  async function handlePostReview(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    await fetch('https://api-tma-2024-production.up.railway.app/review', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(review)
+    })
+    .then(async response => ({
+      response,
+      data: await response.json()
+    }))
+    .then(({response, data}) => {
+      console.log(data);
+
+      setMessage(data.message);
+    });
+  }
+
   const token = localStorage.getItem('token');
 
   const {bookingId} = useParams();
 
   const [booking, setBooking] = useState<Booking | null>();
+
+  const [review, setReview] = useState<Review>({
+    bookingId: bookingId || '',
+    rating: 1
+  });
+
+  const [message, setMessage] = useState('');
 
   if (!booking) return (<><p>Loading...</p></>);
 
@@ -70,7 +105,7 @@ export default function Review() {
         </tbody>
       </table>
       <h2>Review</h2>
-      <form>
+      <form onSubmit={handlePostReview}>
         <label htmlFor='rating'>Rating</label>
         <input
           type='number'
@@ -79,6 +114,9 @@ export default function Review() {
           min={1}
           max={5}
           required
+          onChange={event => {
+            setReview({...review, rating: Number(event.target.value)});
+          }}
         />
         <label htmlFor='comment'>Comment</label>
         <textarea
@@ -87,9 +125,13 @@ export default function Review() {
           rows={5}
           cols={50}
           minLength={10}
+          onChange={event => {
+            setReview({...review, comment: event.target.value});
+          }}
         />
         <input type='submit' value='Post review' />
       </form>
+      {message && <p>{message}</p>}
     </>
   );
 }
