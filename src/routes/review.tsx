@@ -11,10 +11,12 @@ type Booking = {
       name: string;
     };
   };
+  reviews: Review[];
 };
 
 type Review = {
-  bookingId: string;
+  id?: string;
+  bookingId?: string;
   rating: number;
   comment: string;
 };
@@ -42,11 +44,14 @@ export default function Review() {
       console.log(data);
 
       const bookings: Booking[] = data.bookings;
-
-      const booking = bookings.filter(bar => bar.id === bookingId)[0];
+      const booking = bookings.filter(booking => booking.id === bookingId)[0];
 
       if (booking) {
         setBooking(booking);
+
+        const review = booking.reviews[0];
+
+        if (review) setReview(review);
       } else {
         navigate('/user');
       }
@@ -71,6 +76,35 @@ export default function Review() {
     .then(({response, data}) => {
       console.log(data);
 
+      if (response.status === 201) {
+        setReview({...review, id: data.review.id});
+      }
+
+      setMessage(data.message);
+    });
+  }
+
+  async function handleUpdateReview(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    await fetch(`https://api-tma-2024-production.up.railway.app/review/${review.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        rating: review.rating,
+        comment: review.comment
+      })
+    })
+    .then(async response => ({
+      response,
+      data: await response.json()
+    }))
+    .then(({response, data}) => {
+      console.log(data);
+
       setMessage(data.message);
     });
   }
@@ -84,7 +118,7 @@ export default function Review() {
   const [booking, setBooking] = useState<Booking | null>();
 
   const [review, setReview] = useState<Review>({
-    bookingId: bookingId || '',
+    bookingId: bookingId,
     rating: 1,
     comment: ''
   });
@@ -116,7 +150,7 @@ export default function Review() {
         </tbody>
       </table>
       <h2>Review</h2>
-      <form onSubmit={handlePostReview}>
+      <form onSubmit={review.id ? handleUpdateReview : handlePostReview}>
         <label htmlFor='rating'>Rating</label>
         <input
           type='number'
@@ -141,7 +175,7 @@ export default function Review() {
             setReview({...review, comment: event.target.value});
           }}
         />
-        <input type='submit' value='Post review' />
+        <input type='submit' value={review.id ? 'Update review' : 'Post review'} />
       </form>
       {message && <p>{message}</p>}
     </>
