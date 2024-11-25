@@ -16,12 +16,16 @@ type Booking = {
 type Review = {
   bookingId: string;
   rating: number;
-  comment?: string;
+  comment: string;
 };
 
 export default function Review() {
   useEffect(() => {
-    getBooking();
+    if (token) {
+      getBooking();
+    } else {
+      navigate('/sign-in');
+    }
   }, []);
 
   async function getBooking() {
@@ -41,7 +45,11 @@ export default function Review() {
 
       const booking = bookings.filter(bar => bar.id === bookingId)[0];
 
-      setBooking(booking);
+      if (booking) {
+        setBooking(booking);
+      } else {
+        navigate('/user');
+      }
     });
   }
 
@@ -67,6 +75,8 @@ export default function Review() {
     });
   }
 
+  const navigate = useNavigate();
+
   const token = localStorage.getItem('token');
 
   const {bookingId} = useParams();
@@ -75,7 +85,8 @@ export default function Review() {
 
   const [review, setReview] = useState<Review>({
     bookingId: bookingId || '',
-    rating: 1
+    rating: 1,
+    comment: ''
   });
 
   const [message, setMessage] = useState('');
@@ -125,6 +136,7 @@ export default function Review() {
           rows={5}
           cols={50}
           minLength={10}
+          required
           onChange={event => {
             setReview({...review, comment: event.target.value});
           }}
