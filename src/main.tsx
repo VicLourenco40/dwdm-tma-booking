@@ -11,6 +11,7 @@ import User from './routes/user';
 import SignUp from './routes/sign-up';
 import SignIn from './routes/sign-in';
 import Booking from './routes/booking';
+import Review from './routes/review';
 
 const router = createBrowserRouter([{
   path: '/',
@@ -43,6 +44,10 @@ const router = createBrowserRouter([{
     {
       path: '/booking/:hotelId',
       element: <Booking />
+    },
+    {
+      path: '/review/:bookingId',
+      element: <Review />
     }
   ]
 }]);
