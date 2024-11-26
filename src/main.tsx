@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 
-import Root from './routes/root';
+import Layout from './layout/layout';
 import Home from './routes/home';
 import Hotels from './routes/hotels';
 import Hotel from './routes/hotel';
@@ -15,7 +15,7 @@ import Review from './routes/review';
 
 const router = createBrowserRouter([{
   path: '/',
-  element: <Root />,
+  element: <Layout />,
   children: [
     {
       path: '/',
