@@ -1,0 +1,26 @@
+.container {
+  background-color: var(--blue-dark);
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container:hover {
+  filter: brightness(120%);
+  cursor: pointer;
+}
+
+.left {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.rating {
+  font-size: 1.3rem;
+}
+
+.gold {
+  color: var(--gold);
+}

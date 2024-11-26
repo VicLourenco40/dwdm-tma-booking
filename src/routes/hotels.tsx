@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
+import { HotelCard } from '../components/hotel-card/hotel-card';
 import './hotels.css';
 
 type Hotel = {
@@ -24,7 +24,6 @@ export default function Hotels() {
       .then(data => setHotels(data.hotels));
   }
 
-  const navigate = useNavigate();
   const [hotels, setHotels] = useState<Hotel[]>([]);
 
   return (
@@ -32,15 +31,13 @@ export default function Hotels() {
       <h1>Hotels</h1>
       <div className={'hotels-container'}>
         {hotels.map(hotel => (
-          <div className={'hotel'} onClick={() => navigate(`/hotels/${hotel.id}`)}>
-            <div className={'hotel-left'}>
-              <h2>{hotel.name}</h2>
-              <p>{hotel.location}, {hotel.country.name}</p>
-            </div>
-            <p className={'hotel-rating'}>
-              {hotel.averageReview} / 5 <span className='gold'>★</span>
-            </p>
-          </div>
+          <HotelCard
+            id={hotel.id}
+            name={hotel.name}
+            location={hotel.location}
+            country={hotel.country.name}
+            rating={hotel.averageReview}
+          />
         ))}
       </div>
     </>
