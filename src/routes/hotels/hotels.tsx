@@ -36,6 +36,7 @@ export default function Hotels() {
       <div className={styles['hotels-container']}>
         {hotels.map(hotel => (
           <HotelCard
+            key={hotel.id}
             id={hotel.id}
             name={hotel.name}
             location={hotel.location}
