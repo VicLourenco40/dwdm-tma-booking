@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
+import { Rating } from '../rating/rating';
 import styles from './hotel-card.module.css';
 
 type HotelCardProps = {
@@ -22,9 +23,7 @@ export function HotelCard(props: HotelCardProps) {
         <h2>{props.name}</h2>
         <p>{props.location}, {props.country}</p>
       </div>
-      <p className={styles.rating}>
-        {props.rating} / 5 <span className={styles.gold}>★</span>
-      </p>
+      <Rating rating={props.rating} />
     </div>
   );
 }
