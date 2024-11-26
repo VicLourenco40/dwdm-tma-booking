@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { Loading } from '../components/loading/loading';
+import { HotelDetails } from '../components/hotel-details/hotel-details';
+
 type Hotel = {
   id: string;
   name: string;
@@ -56,6 +59,22 @@ export default function Hotel() {
   }
 
   const [hotel, setHotel] = useState<Hotel | null>(null);
+
+  if (!hotel) return (<Loading />);
+
+  return (
+    <>
+      <h1>{hotel.name}</h1>
+
+      <HotelDetails
+        location={hotel.location}
+        country={hotel.country.name}
+        rating={hotel.averageRating}
+        description={hotel.description}
+        image={hotel.rooms[0].images[0].url}
+      />
+    </>
+  );
 
   return (
     <>
