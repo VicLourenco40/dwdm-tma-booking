@@ -6,7 +6,7 @@ import './index.css';
 
 import Layout from './layout/layout';
 import Home from './routes/home';
-import Hotels from './routes/hotels';
+import Hotels from './routes/hotels/hotels';
 import Hotel from './routes/hotel';
 import User from './routes/user';
 import SignUp from './routes/sign-up';

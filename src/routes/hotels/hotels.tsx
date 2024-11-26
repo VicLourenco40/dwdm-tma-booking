@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import { Loading } from '../components/loading/loading';
-import { HotelCard } from '../components/hotel-card/hotel-card';
-import './hotels.css';
+import { Loading } from '../../components/loading/loading';
+import { HotelCard } from '../../components/hotel-card/hotel-card';
+import styles from './hotels.module.css';
 
 type Hotel = {
   id: string;
@@ -33,7 +33,7 @@ export default function Hotels() {
 
       {!hotels.length && <Loading />}
 
-      <div className={'hotels-container'}>
+      <div className={styles['hotels-container']}>
         {hotels.map(hotel => (
           <HotelCard
             id={hotel.id}
