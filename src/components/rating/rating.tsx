@@ -8,11 +8,14 @@ export function Rating(props: RatingProps) {
   const ratingPercentage = props.rating / 5 * 100;
 
   return (
-    <p className={styles.stars}>
+    <div className={styles.stars}>
       ★★★★★
-      <span className={styles['stars-colored']} style={{width: ratingPercentage}}>
+      <div
+        className={styles['stars-colored']}
+        style={{width: ratingPercentage}}
+      >
         ★★★★★
-      </span>
-    </p>
+      </div>
+    </div>
   );
 }
