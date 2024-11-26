@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+import './hotels.css';
 
 type Hotel = {
   id: string;
@@ -7,7 +9,7 @@ type Hotel = {
   location: string;
   country: {
     name: string;
-  }
+  };
   averageReview: number;
 };
 
@@ -22,33 +24,25 @@ export default function Hotels() {
       .then(data => setHotels(data.hotels));
   }
 
+  const navigate = useNavigate();
   const [hotels, setHotels] = useState<Hotel[]>([]);
 
   return (
     <>
       <h1>Hotels</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Location</th>
-            <th>Country</th>
-            <th>Rating</th>
-          </tr>
-        </thead>
-        <tbody>
-          {hotels.map(hotel => (
-            <tr key={hotel.id}>
-              <td>
-                <Link to={`/hotels/${hotel.id}`}>{hotel.name}</Link>
-              </td>
-              <td>{hotel.location}</td>
-              <td>{hotel.country.name}</td>
-              <td>{hotel.averageReview}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className={'hotels-container'}>
+        {hotels.map(hotel => (
+          <div className={'hotel'} onClick={() => navigate(`/hotels/${hotel.id}`)}>
+            <div className={'hotel-left'}>
+              <h2>{hotel.name}</h2>
+              <p>{hotel.location}, {hotel.country.name}</p>
+            </div>
+            <p className={'hotel-rating'}>
+              {hotel.averageReview} / 5 <span className='gold'>★</span>
+            </p>
+          </div>
+        ))}
+      </div>
     </>
   );
 }

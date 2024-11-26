@@ -1,0 +1,35 @@
+.hotels-container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 960px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.hotel {
+  background-color: var(--blue-dark);
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hotel:hover {
+  filter: brightness(120%);
+  cursor: pointer;
+}
+
+.hotel-left {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.hotel-rating {
+  font-size: 1.3rem;
+}
+
+.gold {
+  color: var(--gold);
+}
