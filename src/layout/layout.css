@@ -1,0 +1,26 @@
+header {
+  color: white;
+  background-color: var(--blue-dark);
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  gap: 2rem;
+}
+
+main {
+  color: white;
+  background-color: var(--blue);
+  flex: 1;
+}
+
+footer {
+  color: white;
+  background-color: var(--blue-dark);
+  padding: 1rem;
+  text-align: center;
+}
