@@ -54,10 +54,6 @@ export default function Hotel() {
       .then(data => setHotel(data.hotel));
   }
 
-  function handleBookRoom() {
-    navigate(`/booking/${hotelId}`);
-  }
-
   const [hotel, setHotel] = useState<Hotel | null>(null);
 
   if (!hotel) return (<Loading />);
@@ -67,6 +63,7 @@ export default function Hotel() {
       <h1>{hotel.name}</h1>
 
       <HotelDetails
+        id={hotel.id}
         location={hotel.location}
         country={hotel.country.name}
         rating={hotel.averageRating}
