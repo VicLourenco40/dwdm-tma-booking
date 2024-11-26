@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import './hotel-card.css';
+import styles from './hotel-card.module.css';
 
 type HotelCardProps = {
   id: string;
@@ -15,15 +15,15 @@ export function HotelCard(props: HotelCardProps) {
 
   return (
     <div
-      className={'container'}
-      onClick={() => {navigate(`/hotels/${props.id}`)}}
+      className={styles.container}
+      onClick={() => navigate(`/hotels/${props.id}`)}
     >
-      <div className={'left'}>
+      <div className={styles.left}>
         <h2>{props.name}</h2>
         <p>{props.location}, {props.country}</p>
       </div>
-      <p className={'rating'}>
-        {props.rating} / 5 <span className='gold'>★</span>
+      <p className={styles.rating}>
+        {props.rating} / 5 <span className={styles.gold}>★</span>
       </p>
     </div>
   );
