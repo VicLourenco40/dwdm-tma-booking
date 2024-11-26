@@ -1,0 +1,15 @@
+.button {
+  background-color: var(--blue-darker);
+  padding: 1rem 2rem;
+  width: fit-content;
+  user-select: none;
+}
+
+.button:hover {
+  cursor: pointer;
+  filter: brightness(120%);
+}
+
+.button:active {
+  filter: brightness(80%);
+}
