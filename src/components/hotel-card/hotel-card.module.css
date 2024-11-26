@@ -7,8 +7,12 @@
 }
 
 .container:hover {
-  filter: brightness(120%);
   cursor: pointer;
+  filter: brightness(120%);
+}
+
+.container:active {
+  filter: brightness(80%);
 }
 
 .left {
