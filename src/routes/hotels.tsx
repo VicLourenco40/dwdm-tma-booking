@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import { Loading } from '../components/loading/loading';
 import { HotelCard } from '../components/hotel-card/hotel-card';
 import './hotels.css';
 
@@ -29,6 +30,9 @@ export default function Hotels() {
   return (
     <>
       <h1>Hotels</h1>
+
+      {!hotels.length && <Loading />}
+
       <div className={'hotels-container'}>
         {hotels.map(hotel => (
           <HotelCard

@@ -1,0 +1,6 @@
+.container {
+  background-color: var(--blue-dark);
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  width: fit-content;
+}
