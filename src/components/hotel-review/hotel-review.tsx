@@ -1,0 +1,5 @@
+export function HotelReview() {
+  return (
+    <></>
+  );
+}

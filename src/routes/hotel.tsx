@@ -77,35 +77,6 @@ export default function Hotel() {
     <>
       {hotel ? (
         <>
-          <h1>{hotel.name}</h1>
-          <table>
-            <thead>
-              <tr>
-                <th>Location</th>
-                <th>Country</th>
-                <th>Rooms</th>
-                <th>Rating</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{hotel.location}</td>
-                <td>{hotel.country.name}</td>
-                <td>{hotel.rooms.length}</td>
-                <td>{hotel.averageRating}</td>
-              </tr>
-            </tbody>
-          </table>
-          <p>{hotel.description}</p>
-          <button onClick={handleBookRoom}>Book room</button>
-          <h2>Gallery</h2>
-          <div className='gallery'>
-            {hotel.rooms.map(room => (
-              room.images.map(image => (
-                <img key={image.id} src={image.url} />
-              )))
-            )}
-          </div>
           <h2>Amenities</h2>
           <ul>
             {hotel.amenities.map(amenity => (
