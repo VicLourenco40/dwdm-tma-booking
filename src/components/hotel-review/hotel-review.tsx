@@ -14,7 +14,7 @@ export function HotelReview(props: HotelReviewProps) {
     <div className={styles.container}>
       <div className={styles.top}>
         <div className={styles.left}>
-          <h2>{props.name}</h2>
+          <h3>{props.name}</h3>
           <p>{props.country}</p>
         </div>
         <div className={styles.right}>
