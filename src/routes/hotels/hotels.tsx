@@ -27,12 +27,11 @@ export default function Hotels() {
 
   const [hotels, setHotels] = useState<Hotel[]>([]);
 
+  if (!hotels.length) return (<Loading />);
+
   return (
     <>
       <h1>Hotels</h1>
-
-      {!hotels.length && <Loading />}
-
       <div className={styles['hotels-container']}>
         {hotels.map(hotel => (
           <HotelCard

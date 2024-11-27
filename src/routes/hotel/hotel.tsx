@@ -70,19 +70,23 @@ export default function Hotel() {
         image={hotel.rooms[0].images[0].url}
       />
 
-      <h1>Reviews</h1>
-      <div className={styles['reviews-container']}>
-        {hotel.reviews.map(review => (
-          <HotelReview
-            key={review.id}
-            name={review.booking.user.name}
-            country={review.booking.user.country.name}
-            createdAt={review.createdAt}
-            rating={review.rating}
-            comment={review.comment}
-          />
-        ))}
-      </div>
+      {!!hotel.reviews.length && (
+        <>
+          <h2>Reviews</h2>
+          <div className={styles['reviews-container']}>
+            {hotel.reviews.map(review => (
+              <HotelReview
+                key={review.id}
+                name={review.booking.user.name}
+                country={review.booking.user.country.name}
+                createdAt={review.createdAt}
+                rating={review.rating}
+                comment={review.comment}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </>
   );
 }
