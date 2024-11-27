@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './routes/layout/layout';
 import Home from './routes/home';
 import Hotels from './routes/hotels/hotels';
-import Hotel from './routes/hotel';
+import Hotel from './routes/hotel/hotel';
 import User from './routes/user';
 import SignUp from './routes/sign-up';
 import SignIn from './routes/sign-in';

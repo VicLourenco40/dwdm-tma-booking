@@ -1,0 +1,13 @@
+.reviews-container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.reviews-container> * {
+  width: calc(50% - 0.5rem);
+}
