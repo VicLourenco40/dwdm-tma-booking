@@ -15,7 +15,7 @@ export function HotelAmenity(props: HotelAmenityProps) {
   return (
     <div className={styles.container}>
       <LucideIcon />
-      <p>{amenity.name}</p>
+      <p>{props.name}</p>
     </div>
   );
 }
