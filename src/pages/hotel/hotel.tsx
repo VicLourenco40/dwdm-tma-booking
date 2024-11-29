@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Loading } from '../../components/loading/loading';
+import { Message } from '../../components/message/message';
 import { HotelDetails } from '../../components/hotel-details/hotel-details';
 import { HotelAmenity } from '../../components/hotel-amenity/hotel-amenity';
 import { HotelReview } from '../../components/hotel-review/hotel-review';
@@ -43,21 +44,35 @@ type Hotel = {
 };
 
 export function Hotel() {
-  useEffect(() => {
-    getHotel();
-  }, []);
-
-  const { hotelId } = useParams();
+  const {hotelId} = useParams();
+  const [hotel, setHotel] = useState<Hotel>();
+  const [loading, setLoading] = useState(true);
 
   async function getHotel() {
     await fetch(`https://api-tma-2024-production.up.railway.app/hotels/${hotelId}`)
-      .then(async response => await response.json())
-      .then(data => setHotel(data.hotel));
+      .then(async response => ({
+        response,
+        data: await response.json()
+      }))
+      .then(({response, data}) => {
+        console.log(response, data);
+        setHotel(data.hotel);
+      });
   }
 
-  const [hotel, setHotel] = useState<Hotel | null>(null);
+  useEffect(() => {
+    Promise.all([
+      getHotel()
+    ])
+    .then(() => setLoading(false));
+  }, []);
 
-  if (!hotel) return (<Loading />);
+  if (loading) return (<Loading />);
+
+  if (!hotel) return (<Message message={'Could not retrieve hotel data'} ok={false}/>)
+
+  const hasAmenities = !!hotel.amenities.length;
+  const hasReviews = !!hotel.reviews.length;
 
   return (
     <>
@@ -71,18 +86,22 @@ export function Hotel() {
         image={hotel.rooms[0].images[0].url}
       />
 
-      <h2>Amenities</h2>
-      <div className={styles['amenities-container']}>
-        {hotel.amenities.map(amenity => (
-          <HotelAmenity
-            key={amenity.id}
-            id={amenity.id}
-            name={amenity.name}
-          />
-        ))}
-      </div>
+      {hasAmenities && (
+        <>
+          <h2>Amenities</h2>
+          <div className={styles['amenities-container']}>
+            {hotel.amenities.map(amenity => (
+              <HotelAmenity
+                key={amenity.id}
+                id={amenity.id}
+                name={amenity.name}
+              />
+            ))}
+          </div>
+        </>
+      )}
 
-      {!!hotel.reviews.length && (
+      {hasReviews && (
         <>
           <h2>Reviews</h2>
           <div className={styles['reviews-container']}>
