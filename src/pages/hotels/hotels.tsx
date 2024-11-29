@@ -15,19 +15,29 @@ type Hotel = {
 };
 
 export function Hotels() {
-  useEffect(() => {
-    getHotels();
-  }, []);
+  const [hotels, setHotels] = useState<Hotel[]>([]);
+  const [loading, setLoading] = useState(true);
 
   async function getHotels() {
     await fetch('https://api-tma-2024-production.up.railway.app/hotels')
-      .then(async response => await response.json())
-      .then(data => setHotels(data.hotels));
+      .then(async response => ({
+        response,
+        data: await response.json()
+      }))
+      .then(({response, data}) => {
+        console.log(response, data);
+        setHotels(data.hotels);
+      });
   }
 
-  const [hotels, setHotels] = useState<Hotel[]>([]);
+  useEffect(() => {
+    Promise.all([
+      getHotels()
+    ]).then(() => setLoading(false));
 
-  if (!hotels.length) return (<Loading />);
+  }, []);
+
+  if (loading) return (<Loading />);
 
   return (
     <>
