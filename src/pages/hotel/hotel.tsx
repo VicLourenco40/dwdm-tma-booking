@@ -69,7 +69,7 @@ export function Hotel() {
 
   if (loading) return (<Loading />);
 
-  if (!hotel) return (<Message message={'Could not retrieve hotel data'} ok={false}/>)
+  if (!hotel) return (<Message message={'Could not retrieve hotel'} ok={false}/>)
 
   const hasAmenities = !!hotel.amenities.length;
   const hasReviews = !!hotel.reviews.length;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { Loading } from '../../components/loading/loading';
+import { Message } from '../../components/message/message';
 import { HotelCard } from '../../components/hotel-card/hotel-card';
 import styles from './hotels.module.css';
 
@@ -15,7 +16,7 @@ type Hotel = {
 };
 
 export function Hotels() {
-  const [hotels, setHotels] = useState<Hotel[]>([]);
+  const [hotels, setHotels] = useState<Hotel[]>();
   const [loading, setLoading] = useState(true);
 
   async function getHotels() {
@@ -39,21 +40,29 @@ export function Hotels() {
 
   if (loading) return (<Loading />);
 
+  if (!hotels) return (<Message message={'Could not retrieve hotels'} ok={false}/>);
+
+  const hasHotels = !!hotels.length;
+
   return (
     <>
-      <h1>Hotels</h1>
-      <div className={styles['hotels-container']}>
-        {hotels.map(hotel => (
-          <HotelCard
-            key={hotel.id}
-            id={hotel.id}
-            name={hotel.name}
-            location={hotel.location}
-            country={hotel.country.name}
-            rating={hotel.averageReview}
-          />
-        ))}
-      </div>
+      {hasHotels && (
+        <>
+          <h1>Hotels</h1>
+          <div className={styles['hotels-container']}>
+            {hotels.map(hotel => (
+              <HotelCard
+                key={hotel.id}
+                id={hotel.id}
+                name={hotel.name}
+                location={hotel.location}
+                country={hotel.country.name}
+                rating={hotel.averageReview}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </>
   );
 }
