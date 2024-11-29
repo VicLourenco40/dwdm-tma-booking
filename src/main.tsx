@@ -2,15 +2,15 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import Layout from './routes/layout/layout';
-import Home from './routes/home';
-import Hotels from './routes/hotels/hotels';
-import Hotel from './routes/hotel/hotel';
-import User from './routes/user';
-import SignUp from './routes/sign-up';
-import SignIn from './routes/sign-in';
-import Booking from './routes/booking';
-import Review from './routes/review';
+import Layout from './pages/layout/layout';
+import Home from './pages/home';
+import Hotels from './pages/hotels/hotels';
+import Hotel from './pages/hotel/hotel';
+import User from './pages/user';
+import SignUp from './pages/sign-up';
+import SignIn from './pages/sign-in';
+import Booking from './pages/booking';
+import Review from './pages/review';
 import './index.css';
 
 const router = createBrowserRouter([{
