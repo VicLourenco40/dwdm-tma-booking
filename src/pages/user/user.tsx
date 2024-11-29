@@ -34,7 +34,7 @@ type Review = {
   comment: string;
 };
 
-export default function User() {
+export function User() {
   useEffect(() => {
     if (token) {
       getUser();

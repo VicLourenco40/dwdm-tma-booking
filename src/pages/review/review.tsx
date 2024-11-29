@@ -23,7 +23,7 @@ type Review = {
   comment: string;
 };
 
-export default function Review() {
+export function Review() {
   useEffect(() => {
     if (token) {
       getBooking();

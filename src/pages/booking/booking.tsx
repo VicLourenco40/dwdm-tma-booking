@@ -26,7 +26,7 @@ type Booking = {
   endDate: string;
 }
 
-export default function Booking() {
+export function Booking() {
   useEffect(() => {
     if (token) {
       getHotel();

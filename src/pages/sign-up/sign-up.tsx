@@ -17,7 +17,7 @@ type User = {
   terms: boolean;
 }
 
-export default function SignUp() {
+export function SignUp() {
   useEffect(() => {
     getCountries();
   }, []);

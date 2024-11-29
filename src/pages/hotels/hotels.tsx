@@ -14,7 +14,7 @@ type Hotel = {
   averageReview: number;
 };
 
-export default function Hotels() {
+export function Hotels() {
   useEffect(() => {
     getHotels();
   }, []);

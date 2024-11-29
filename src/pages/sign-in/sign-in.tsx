@@ -8,7 +8,7 @@ type User = {
   password: string;
 }
 
-export default function SignIn() {
+export function SignIn() {
   async function handleSignIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 

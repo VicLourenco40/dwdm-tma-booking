@@ -2,7 +2,7 @@ import { Link, Outlet } from 'react-router-dom';
 
 import './layout.css';
 
-export default function Layout() {
+export function Layout() {
   return (
     <>
       <header>
