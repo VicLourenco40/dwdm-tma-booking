@@ -1,6 +1,8 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import styles from './review.module.css';
+
 type Booking = {
   id: string;
   checkIn: string;

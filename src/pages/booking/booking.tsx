@@ -1,6 +1,8 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import styles from './booking.module.css';
+
 type Hotel = {
   id: string;
   name: string;
