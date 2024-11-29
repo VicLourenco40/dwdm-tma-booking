@@ -33,8 +33,8 @@ export function Hotels() {
   useEffect(() => {
     Promise.all([
       getHotels()
-    ]).then(() => setLoading(false));
-
+    ])
+    .then(() => setLoading(false));
   }, []);
 
   if (loading) return (<Loading />);
