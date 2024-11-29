@@ -40,7 +40,7 @@ export function Hotels() {
 
   if (loading) return (<Loading />);
 
-  if (!hotels) return (<Message message={'Could not retrieve hotels'} ok={false}/>);
+  if (!hotels) return (<Message message={'Could not retrieve hotels'} success={false}/>);
 
   const hasHotels = !!hotels.length;
 
