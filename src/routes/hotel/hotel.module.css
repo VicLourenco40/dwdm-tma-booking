@@ -1,7 +1,12 @@
-.reviews-container {
+.amenities-container {
+  background-color: var(--blue-dark);
   margin: 0 auto;
+  padding: 1rem;
   width: 100%;
-  max-width: 1280px;
+  max-width: 640px;
+}
+
+.reviews-container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;

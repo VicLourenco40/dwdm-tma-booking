@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { Loading } from '../../components/loading/loading';
 import { HotelDetails } from '../../components/hotel-details/hotel-details';
+import { HotelAmenity } from '../../components/hotel-amenity/hotel-amenity';
 import { HotelReview } from '../../components/hotel-review/hotel-review';
 import styles from './hotel.module.css';
 
@@ -18,7 +19,7 @@ type Hotel = {
     images: [{
       id: string;
       url: string;
-    }]
+    }];
   }];
   amenities: [{
     id: string;
@@ -34,10 +35,10 @@ type Hotel = {
         name: string;
         country: {
           name: string;
-        }
-      }
-    }
-  }]
+        };
+      };
+    };
+  }];
   averageRating: number;
 };
 
@@ -69,6 +70,17 @@ export default function Hotel() {
         description={hotel.description}
         image={hotel.rooms[0].images[0].url}
       />
+
+      <h2>Amenities</h2>
+      <div className={styles['amenities-container']}>
+        {hotel.amenities.map(amenity => (
+          <HotelAmenity
+            key={amenity.id}
+            id={amenity.id}
+            name={amenity.name}
+          />
+        ))}
+      </div>
 
       {!!hotel.reviews.length && (
         <>
