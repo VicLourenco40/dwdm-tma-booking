@@ -5,9 +5,13 @@
 }
 
 :root {
-  --blue: #2D65A4;
+  --blue: #2d65a4;
   --blue-dark: #204875;
-  --blue-darker: #132B46;
+  --blue-darker: #132b46;
+  --success: #65a30d;
+  --success-text: #d9f99d;
+  --error: #dc2626;
+  --error-text: #fecaca;
 }
 
 body {

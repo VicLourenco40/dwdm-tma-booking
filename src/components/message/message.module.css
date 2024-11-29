@@ -1,0 +1,16 @@
+.success, .error {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.success {
+  color: var(--success-text);
+  background-color: var(--success);
+}
+
+.error {
+  color: var(--error-text);
+  background-color: var(--error);
+}
