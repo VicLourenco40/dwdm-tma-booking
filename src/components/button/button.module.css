@@ -1,4 +1,5 @@
 .button {
+  text-align: center;
   background-color: var(--blue-darker);
   padding: 1rem 2rem;
   width: fit-content;

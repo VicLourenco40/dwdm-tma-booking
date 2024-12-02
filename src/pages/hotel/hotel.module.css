@@ -11,8 +11,8 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
-}
 
-.reviews-container> * {
-  width: calc(50% - 0.5rem);
+  & > * {
+    width: calc(50% - 0.5rem);
+  }
 }
