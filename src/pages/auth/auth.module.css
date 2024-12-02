@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  gap: 2rem;
 }
 
 .sign-in, .sign-up {
@@ -17,20 +18,19 @@
   gap: 1rem;
 }
 
-.form input {
-  flex: 1;
+.form input, form select {
   color: white;
   background-color: var(--blue-darker);
   border: none;
   padding: 1rem;
-}
 
-.form input:hover {
-  filter: brightness(120%);
-}
+  &:hover {
+    filter: brightness(120%);
+  }
 
-.form input:active {
-  filter: brightness(80%);
+  &:active {
+    filter: brightness(80%);
+  }
 }
 
 .form .form-submit {
@@ -39,4 +39,11 @@
   margin-top: 1rem;
   padding: 1rem 2rem;
   width: fit-content;
+}
+
+.form-row {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
