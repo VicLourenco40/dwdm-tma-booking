@@ -1,4 +1,12 @@
 .container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading {
   background-color: var(--blue-dark);
   margin: 0 auto;
   padding: 1rem 2rem;
