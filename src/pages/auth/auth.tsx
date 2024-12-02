@@ -115,10 +115,12 @@ export function Auth() {
         <form className={styles.form} onSubmit={handleSignIn}>
           <label htmlFor={'sign-in-email'}>Email</label>
           <input type={'email'} id={'sign-in-email'} name={'sign-in-email'} required
+            placeholder={'Enter your email address'}
             onChange={event => setSignIn({...signIn, email: event.target.value})} />
 
           <label htmlFor={'sign-in-password'}>Password</label>
           <input type={'password'} id={'sign-in-password'} name={'sign-in-password'} required minLength={6}
+            placeholder={'Enter your password'}
             onChange={event => setSignIn({...signIn, password: event.target.value})} />
 
           <input className={styles['form-submit']} type={'submit'} value={'Sign In'} />
@@ -130,14 +132,17 @@ export function Auth() {
         <form className={styles.form} onSubmit={handleSignUp}>
           <label htmlFor={'sign-up-name'}>Name</label>
           <input type={'text'} name={'sign-up-name'} id={'sign-up-name'} required minLength={3}
+            placeholder={'Enter your first and last name'}
             onChange={event => setSignUp({...signUp, name: event.target.value})} />
 
           <label htmlFor={'sign-up-email'}>Email</label>
           <input type={'email'} name={'sign-up-email'} id={'sign-up-email'} required
+            placeholder={'Enter your email address'}
             onChange={event => setSignUp({...signUp, email: event.target.value})} />
 
           <label htmlFor={'sign-up-password'}>Password</label>
           <input type={'password'} name={'sign-up-password'} id={'sign-up-password'} required minLength={6}
+            placeholder={'Enter your password'}
             onChange={event => setSignUp({...signUp, password: event.target.value})} />
 
           <label htmlFor={'sign-up-birth-date'}>Date of birth</label>
