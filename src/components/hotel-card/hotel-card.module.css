@@ -4,15 +4,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
 
-.container:hover {
-  cursor: pointer;
-  filter: brightness(120%);
-}
+  &:hover {
+    cursor: pointer;
+    filter: brightness(120%);
+  }
 
-.container:active {
-  filter: brightness(80%);
+  &:active {
+    filter: brightness(80%);
+  }
 }
 
 .left {
