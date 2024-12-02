@@ -18,7 +18,7 @@
   gap: 1rem;
 }
 
-.form input, form select {
+.form input, .form select {
   color: white;
   background-color: var(--blue-darker);
   border: none;
