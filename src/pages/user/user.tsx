@@ -39,7 +39,7 @@ export function User() {
     if (token) {
       getUser();
     } else {
-      navigate('/sign-in');
+      navigate('/auth');
     }
   }, []);
 
@@ -61,7 +61,7 @@ export function User() {
         setBookings(data.bookings);
       } else {
         localStorage.removeItem('token');
-        navigate('/sign-in');
+        navigate('/auth');
       }
     });
   }
@@ -97,7 +97,7 @@ export function User() {
 
   function handleSignOut() {
     localStorage.removeItem('token');
-    navigate('/sign-in');
+    navigate('/auth');
   }
 
   async function handleDeleteReview(id: string) {

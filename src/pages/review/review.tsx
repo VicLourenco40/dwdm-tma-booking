@@ -28,7 +28,7 @@ export function Review() {
     if (token) {
       getBooking();
     } else {
-      navigate('/sign-in');
+      navigate('/auth');
     }
   }, []);
 

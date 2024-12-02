@@ -31,7 +31,7 @@ export function Booking() {
     if (token) {
       getHotel();
     } else {
-      navigate('/sign-in');
+      navigate('/auth');
     }
   }, []);
 
