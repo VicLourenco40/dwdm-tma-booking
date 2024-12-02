@@ -3,8 +3,6 @@ import { Home } from './pages/home/home';
 import { Hotels } from './pages/hotels/hotels';
 import { Hotel } from './pages/hotel/hotel';
 import { User } from './pages/user/user';
-import { SignUp } from './pages/sign-up/sign-up';
-import { SignIn } from './pages/sign-in/sign-in';
 import { Auth } from './pages/auth/auth';
 import { Booking } from './pages/booking/booking';
 import { Review } from './pages/review/review';
@@ -29,14 +27,6 @@ export const router = createBrowserRouter([{
     {
       path: '/user',
       element: <User />
-    },
-    {
-      path: '/sign-up',
-      element: <SignUp />
-    },
-    {
-      path: '/sign-in',
-      element: <SignIn />
     },
     {
       path: '/auth',
