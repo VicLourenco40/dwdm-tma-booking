@@ -1,12 +1,11 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Calendar, Globe, Mail, UserRound } from 'lucide-react';
 
 import { Loading } from '../../components/loading/loading';
 import { Message } from '../../components/message/message';
 import { Button } from '../../components/button/button';
-import styles from './user.module.css';
 import { UserDetails } from '../../components/user-details/user-details';
+import styles from './user.module.css';
 
 type User = {
   id: string;
@@ -14,13 +13,20 @@ type User = {
   email: string;
   country: {
     name: string;
-  }
+  };
   birthDate: string;
 };
 
 type ChangeEmail = {
   email: string;
   password: string;
+};
+
+type Review = {
+  id: string;
+  bookingId: string;
+  rating: number;
+  comment: string;
 };
 
 type Booking = {
@@ -37,25 +43,13 @@ type Booking = {
   reviews: Review[];
 };
 
-type Review = {
-  id: string;
-  bookingId: string;
-  rating: number;
-  comment: string;
-};
-
-type Message = {
-  message: string;
-  success: boolean;
-};
-
 export function User() {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
   const [user, setUser] = useState<User>();
   const [loading, setLoading] = useState(true);
   const [changeEmail, setChangeEmail] = useState<ChangeEmail>({email: '', password: ''});
-  const [message, setMessage] = useState<Message>();
+  const [message, setMessage] = useState({message: '', success: true});
 
   async function getUser() {
     await fetch('https://api-tma-2024-production.up.railway.app/me', {
@@ -144,7 +138,7 @@ export function User() {
 
             <input className={styles['form-submit']} type={'submit'} value={'Update'} />
           </form>
-          {message && <Message message={message.message} success={message.success} />}
+          {message.message && <Message message={message.message} success={message.success} />}
         </div>
       </div>
     </>
