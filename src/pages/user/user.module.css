@@ -1,24 +1,12 @@
 .container {
   display: flex;
   gap: 2rem;
-
-  & > * {
-    flex: 1;
-  }
 }
 
 .section {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-}
-
-.details {
-  background-color: var(--blue-dark);
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   gap: 2rem;
 }
 

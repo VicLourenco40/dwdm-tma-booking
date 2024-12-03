@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { Loading } from '../../components/loading/loading';
 import { Message } from '../../components/message/message';
-import { Button } from '../../components/button/button';
 import { UserDetails } from '../../components/user-details/user-details';
 import styles from './user.module.css';
 
@@ -98,11 +97,6 @@ export function User() {
     })
   }
 
-  function handleSignOut() {
-    localStorage.removeItem('token');
-    navigate('/auth');
-  }
-
   if (loading) return (<Loading />);
 
   if (!user) return (<Message message={'Could not retrieve user'} success={false} />);
@@ -112,15 +106,12 @@ export function User() {
       <div className={styles.container}>
         <div className={styles.section}>
           <h2>User</h2>
-          <div className={styles.details}>
-            <UserDetails
-              name={user.name}
-              email={user.email}
-              country={user.country.name}
-              birthDate={user.birthDate}
-            />
-            <Button text={'Sign out'} onClick={handleSignOut} />
-          </div>
+          <UserDetails
+            name={user.name}
+            email={user.email}
+            country={user.country.name}
+            birthDate={user.birthDate}
+          />
         </div>
         <div className={styles.section}>
           <h2>Settings</h2>

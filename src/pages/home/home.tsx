@@ -1,5 +1,6 @@
-import { Button } from '../../components/button/button';
 import { useNavigate } from 'react-router-dom';
+
+import { Button } from '../../components/button/button';
 import styles from './home.module.css';
 
 export function Home() {
