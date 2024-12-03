@@ -44,7 +44,7 @@ type Review = {
   comment: string;
 };
 
-type AAA = {
+type Message = {
   message: string;
   success: boolean;
 };
@@ -55,7 +55,7 @@ export function User() {
   const [user, setUser] = useState<User>();
   const [loading, setLoading] = useState(true);
   const [changeEmail, setChangeEmail] = useState<ChangeEmail>({email: '', password: ''});
-  const [message, setMessage] = useState<AAA>();
+  const [message, setMessage] = useState<Message>();
 
   async function getUser() {
     await fetch('https://api-tma-2024-production.up.railway.app/me', {
