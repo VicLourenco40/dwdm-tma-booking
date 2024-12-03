@@ -1,6 +1,10 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Calendar, Globe, Mail, UserRound } from 'lucide-react';
 
+import { Loading } from '../../components/loading/loading';
+import { Message } from '../../components/message/message';
+import { Button } from '../../components/button/button';
 import styles from './user.module.css';
 
 type User = {
@@ -11,6 +15,11 @@ type User = {
     name: string;
   }
   birthDate: string;
+};
+
+type ChangeEmail = {
+  email: string;
+  password: string;
 };
 
 type Booking = {
@@ -34,14 +43,18 @@ type Review = {
   comment: string;
 };
 
+type AAA = {
+  message: string;
+  success: boolean;
+};
+
 export function User() {
-  useEffect(() => {
-    if (token) {
-      getUser();
-    } else {
-      navigate('/auth');
-    }
-  }, []);
+  const navigate = useNavigate();
+  const token = localStorage.getItem('token');
+  const [user, setUser] = useState<User>();
+  const [loading, setLoading] = useState(true);
+  const [changeEmail, setChangeEmail] = useState<ChangeEmail>({email: '', password: ''});
+  const [message, setMessage] = useState<AAA>();
 
   async function getUser() {
     await fetch('https://api-tma-2024-production.up.railway.app/me', {
@@ -54,17 +67,19 @@ export function User() {
       data: await response.json()
     }))
     .then(({response, data}) => {
-      console.log(data);
-
-      if (response.status === 200) {
-        setUser(data.user);
-        setBookings(data.bookings);
-      } else {
-        localStorage.removeItem('token');
-        navigate('/auth');
-      }
-    });
+      console.log(response, data)
+      setUser(data.user);
+    })
   }
+
+  useEffect(() => {
+    if (!token) navigate('/auth');
+
+    Promise.all([
+      getUser()
+    ])
+    .then(() => setLoading(false));
+  }, []);
 
   async function handleChangeEmail(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -75,23 +90,16 @@ export function User() {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        email: email,
-        password: password
-      })
+      body: JSON.stringify(changeEmail)
     })
     .then(async response => ({
       response,
       data: await response.json()
     }))
     .then(({response, data}) => {
-      console.log(data);
-
-      if (response.status === 200 && user) {
-        setUser({...user, email: email});
-      }
-
-      setMessage(data.message);
+      console.log(response, data);
+      setMessage({message: data.message, success: response.ok});
+      if (response.ok) setUser({...user!, email: changeEmail.email});
     })
   }
 
@@ -100,117 +108,44 @@ export function User() {
     navigate('/auth');
   }
 
-  async function handleDeleteReview(id: string) {
-    await fetch(`https://api-tma-2024-production.up.railway.app/review/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-    .then(async response => ({
-      response,
-      data: await response.json()
-    }))
-    .then(({response, data}) => {
-      console.log(data);
+  if (loading) return (<Loading />);
 
-      if (response.status === 201) {
-        getUser();
-      }
-    });
-  }
-
-  const navigate = useNavigate();
-
-  const token = localStorage.getItem('token');
-
-  const [user, setUser] = useState<User | null>(null);
-
-  const [bookings, setBookings] = useState<Booking[]>([]);
-
-  const [email, setEmail] = useState('');
-
-  const [password, setPassword] = useState('');
-
-  const [message, setMessage] = useState('');
-
-  if (!user) return (<p>Loading...</p>);
+  if (!user) return (<Message message={'Could not retrieve user'} success={false} />);
 
   return (
     <>
-      <h1>{user.name}</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Email</th>
-            <th>Country</th>
-            <th>Birthdate</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{user.email}</td>
-            <td>{user.country.name}</td>
-            <td>{user.birthDate.split('T')[0]}</td>
-          </tr>
-        </tbody>
-      </table>
-      <h2>Settings</h2>
-      <h3>Change email</h3>
-      <form onSubmit={handleChangeEmail}>
-        <label htmlFor='email'>New email</label>
-        <input
-          type='email'
-          name='email'
-          id='email'
-          required
-          onChange={event => setEmail(event.target.value)}
-        />
-        <label htmlFor='password'>Password</label>
-        <input
-          type='password'
-          name='password'
-          id='password'
-          minLength={6}
-          required
-          onChange={event => setPassword(event.target.value)}
-        />
-        <input type='submit' value='Change' />
-      </form>
-      {message && <p>{message}</p>}
-      <button onClick={handleSignOut}>Sign Out</button>
-      <h2>Bookings</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Hotel</th>
-            <th>Room</th>
-            <th>Check-in</th>
-            <th>Check-out</th>
-            <th>Review</th>
-          </tr>
-        </thead>
-        <tbody>
-          {bookings.map(booking => (
-            <tr key={booking.id}>
-              <td><Link to={`/hotels/${booking.room.hotel.id}`}>{booking.room.hotel.name}</Link></td>
-              <td>{booking.room.type}</td>
-              <td>{booking.checkIn.split('T')[0]}</td>
-              <td>{booking.checkOut.split('T')[0]}</td>
-              <td>
-                <button onClick={() => navigate(`/review/${booking.id}`)}>
-                  {booking.reviews[0] ? 'Update Review' : 'Create review'}
-                </button>
-                {booking.reviews[0] && (
-                  <button onClick={() => handleDeleteReview(booking.reviews[0].id)}>
-                    Delete review
-                  </button>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className={styles.container}>
+        <div className={styles.section}>
+          <h2>User</h2>
+          <div className={styles.details}>
+            <ul className={styles.list}>
+              <li><UserRound />Name: {user.name}</li>
+              <li><Mail />Email: {user.email}</li>
+              <li><Globe />Country: {user.country.name}</li>
+              <li><Calendar />Birth date: {user.birthDate.split('T')[0]}</li>
+            </ul>
+            <Button text={'Sign out'} onClick={handleSignOut} />
+          </div>
+        </div>
+        <div className={styles.section}>
+          <h2>Settings</h2>
+          <form className={styles.form} onSubmit={handleChangeEmail}>
+            <h3>Change email</h3>
+            <label htmlFor={'email'}>New Email</label>
+            <input type={'email'} name={'email'} id={'email'} required
+              placeholder={'Enter your new email address'}
+              onChange={event => setChangeEmail({...changeEmail, email: event.target.value})} />
+
+            <label htmlFor={'password'}>Password</label>
+            <input type={'password'} name={'password'} id={'password'} required minLength={6}
+              placeholder={'Enter your password'}
+              onChange={event => setChangeEmail({...changeEmail, password: event.target.value})} />
+
+            <input className={styles['form-submit']} type={'submit'} value={'Update'} />
+          </form>
+          {message && <Message message={message.message} success={message.success} />}
+        </div>
+      </div>
     </>
   );
 }
