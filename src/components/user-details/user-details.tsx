@@ -15,7 +15,7 @@ export function UserDetails(props: UserDetailsProps) {
       <li><UserRound />Name: {props.name}</li>
       <li><Mail />Email: {props.email}</li>
       <li><Globe />Country: {props.country}</li>
-      <li><Calendar />Birth date: {props.birthDate}</li>
+      <li><Calendar />Birth date: {props.birthDate.split('T')[0]}</li>
     </ul>
   );
 }
