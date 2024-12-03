@@ -6,6 +6,7 @@ import { Loading } from '../../components/loading/loading';
 import { Message } from '../../components/message/message';
 import { Button } from '../../components/button/button';
 import styles from './user.module.css';
+import { UserDetails } from '../../components/user-details/user-details';
 
 type User = {
   id: string;
@@ -118,12 +119,12 @@ export function User() {
         <div className={styles.section}>
           <h2>User</h2>
           <div className={styles.details}>
-            <ul className={styles.list}>
-              <li><UserRound />Name: {user.name}</li>
-              <li><Mail />Email: {user.email}</li>
-              <li><Globe />Country: {user.country.name}</li>
-              <li><Calendar />Birth date: {user.birthDate.split('T')[0]}</li>
-            </ul>
+            <UserDetails
+              name={user.name}
+              email={user.email}
+              country={user.country.name}
+              birthDate={user.birthDate}
+            />
             <Button text={'Sign out'} onClick={handleSignOut} />
           </div>
         </div>
