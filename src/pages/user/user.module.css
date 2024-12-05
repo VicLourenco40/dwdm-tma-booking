@@ -3,6 +3,16 @@
   gap: 2rem;
 }
 
+.message-container {
+  margin-left: calc(50% + 1rem);
+}
+
+.bookings-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .section {
   flex: 1;
   display: flex;

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Loading } from '../../components/loading/loading';
 import { Message } from '../../components/message/message';
 import { UserDetails } from '../../components/user-details/user-details';
+import { UserBooking } from '../../components/user-booking/user-booking';
 import styles from './user.module.css';
 
 type User = {
@@ -46,6 +47,7 @@ export function User() {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
   const [user, setUser] = useState<User>();
+  const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
   const [changeEmail, setChangeEmail] = useState<ChangeEmail>({email: '', password: ''});
   const [message, setMessage] = useState({message: '', success: true});
@@ -63,6 +65,7 @@ export function User() {
     .then(({response, data}) => {
       console.log(response, data)
       setUser(data.user);
+      setBookings(data.bookings);
     })
   }
 
@@ -94,6 +97,22 @@ export function User() {
       console.log(response, data);
       setMessage({message: data.message, success: response.ok});
       if (response.ok) setUser({...user!, email: changeEmail.email});
+    })
+  }
+
+  async function handleDeleteReview(bookingId: string) {
+    await fetch(`https://api-tma-2024-production.up.railway.app/review/${bookingId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(async response => ({
+      response,
+      data: await response.json()
+    }))
+    .then(({response, data}) => {
+      console.log(response, data);
     })
   }
 
@@ -131,10 +150,26 @@ export function User() {
           </form>
         </div>
       </div>
-      <div className={styles.container}>
-        <div className={styles.section} />
-        <div className={styles.section}>
-          {message.message && <Message message={message.message} success={message.success} />}
+      {message.message && (
+        <div className={styles['message-container']}>
+          <Message message={message.message} success={message.success} />
+        </div>
+      )}
+      <div className={styles.section}>
+        <h2>Bookings</h2>
+        <div className={styles['bookings-container']}>
+          {bookings.map(booking => (
+            <UserBooking
+              key={booking.id}
+              bookingId={booking.id}
+              hotel={booking.room.hotel.name}
+              room={booking.room.type}
+              checkIn={booking.checkIn}
+              checkOut={booking.checkOut}
+              hasReview={booking.reviews.length > 0}
+              handleDeleteReview={handleDeleteReview}
+            />
+          ))}
         </div>
       </div>
     </>
