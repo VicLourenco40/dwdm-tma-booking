@@ -1,0 +1,32 @@
+.user-booking {
+  background-color: var(--blue-dark);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.dates {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.date {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.details {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.buttons-container {
+  display: flex;
+  gap: 1rem;
+}
