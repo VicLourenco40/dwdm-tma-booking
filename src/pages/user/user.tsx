@@ -129,6 +129,11 @@ export function User() {
 
             <input className={styles['form-submit']} type={'submit'} value={'Update'} />
           </form>
+        </div>
+      </div>
+      <div className={styles.container}>
+        <div className={styles.section} />
+        <div className={styles.section}>
           {message.message && <Message message={message.message} success={message.success} />}
         </div>
       </div>
