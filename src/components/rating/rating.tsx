@@ -12,7 +12,7 @@ export function Rating(props: RatingProps) {
       ★★★★★
       <div
         className={styles['stars-colored']}
-        style={{width: ratingPercentage}}
+        style={{width: `${ratingPercentage}%`}}
       >
         ★★★★★
       </div>

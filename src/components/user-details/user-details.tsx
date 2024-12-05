@@ -1,5 +1,5 @@
-import { Calendar, Globe, Mail, UserRound } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { Calendar, Globe, Mail, UserRound } from 'lucide-react';
 
 import { Button } from '../button/button';
 import styles from './user-details.module.css';
