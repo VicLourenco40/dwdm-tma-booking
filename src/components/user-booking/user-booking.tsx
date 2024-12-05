@@ -10,12 +10,13 @@ type UserBookingProps = {
   room: string;
   checkIn: string;
   checkOut: string;
-  hasReview: boolean;
-  handleDeleteReview: (bookingId: string) => void;
+  reviewId: string | null;
+  handleDeleteReview: (reviewId: string) => void;
 };
 
 export function UserBooking(props: UserBookingProps) {
   const navigate = useNavigate();
+  const hasReview = !!props.reviewId;
 
   return (
     <div className={styles['user-booking']}>
@@ -34,12 +35,12 @@ export function UserBooking(props: UserBookingProps) {
         <p>{props.room}</p>
       </div>
       <div className={styles['buttons-container']}>
-        {props.hasReview ? (
+        {hasReview ? (
           <>
             <Button text={'Edit Review'}
               onClick={() => navigate(`/review/${props.bookingId}`)} />
             <Button text={'Delete Review'}
-              onClick={() => props.handleDeleteReview(props.bookingId)} />
+              onClick={() => props.handleDeleteReview(props.reviewId!)} />
           </>
         ) : (
           <Button text={'Add Review'}

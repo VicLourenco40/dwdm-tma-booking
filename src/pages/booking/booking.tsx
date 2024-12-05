@@ -60,7 +60,7 @@ export function Booking() {
       console.log(data);
 
       setMessage(data.message);
-    })
+    });
   }
 
   function getNextDay(day: string) {

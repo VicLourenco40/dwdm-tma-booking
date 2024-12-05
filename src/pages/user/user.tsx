@@ -66,7 +66,7 @@ export function User() {
       console.log(response, data)
       setUser(data.user);
       setBookings(data.bookings);
-    })
+    });
   }
 
   useEffect(() => {
@@ -97,23 +97,20 @@ export function User() {
       console.log(response, data);
       setMessage({message: data.message, success: response.ok});
       if (response.ok) setUser({...user!, email: changeEmail.email});
-    })
+    });
   }
 
-  async function handleDeleteReview(bookingId: string) {
-    await fetch(`https://api-tma-2024-production.up.railway.app/review/${bookingId}`, {
+  async function handleDeleteReview(reviewId: string) {
+    await fetch(`https://api-tma-2024-production.up.railway.app/review/${reviewId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`
       }
     })
-    .then(async response => ({
-      response,
-      data: await response.json()
-    }))
-    .then(({response, data}) => {
-      console.log(response, data);
-    })
+    .then(response => {
+      console.log(response);
+      if (response.ok) getUser();
+    });
   }
 
   if (loading) return (<Loading />);
@@ -166,7 +163,7 @@ export function User() {
               room={booking.room.type}
               checkIn={booking.checkIn}
               checkOut={booking.checkOut}
-              hasReview={booking.reviews.length > 0}
+              reviewId={booking.reviews.length ? booking.reviews[0].id : null}
               handleDeleteReview={handleDeleteReview}
             />
           ))}
