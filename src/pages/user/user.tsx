@@ -24,7 +24,7 @@ type ChangeEmail = {
 
 type Review = {
   id: string;
-  bookingId: string;
+  createdAt: string;
   rating: number;
   comment: string;
 };
@@ -163,8 +163,10 @@ export function User() {
               room={booking.room.type}
               checkIn={booking.checkIn}
               checkOut={booking.checkOut}
-              reviewId={booking.reviews.length ? booking.reviews[0].id : null}
-              handleDeleteReview={handleDeleteReview}
+              {...booking.reviews.length > 0 && {
+                review: booking.reviews[0],
+                handleDeleteReview: handleDeleteReview
+              }}
             />
           ))}
         </div>

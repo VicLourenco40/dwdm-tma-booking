@@ -2,6 +2,12 @@
   background-color: var(--blue-dark);
   padding: 2rem;
   display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.booking {
+  display: flex;
   align-items: center;
   gap: 2rem;
 }
@@ -23,10 +29,23 @@
   flex: 1;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .buttons-container {
   display: flex;
+  gap: 1rem;
+}
+
+.review {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 2rem;
+}
+
+.review-right {
+  display: flex;
+  align-items: baseline;
   gap: 1rem;
 }
