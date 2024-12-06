@@ -1,0 +1,30 @@
+.booking-details {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.image-container {
+  background-color: var(--blue-darker);
+  height: 24rem;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.details-list {
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.details-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
