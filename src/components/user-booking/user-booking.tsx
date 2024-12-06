@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Calendar, CalendarOff } from 'lucide-react';
 
@@ -19,11 +20,25 @@ type UserBookingProps = {
   checkIn: string;
   checkOut: string;
   review?: Review;
-  handleDeleteReview?: (reviewId: string) => void;
 };
 
 export function UserBooking(props: UserBookingProps) {
   const navigate = useNavigate();
+  const token = localStorage.getItem('token');
+  const [hasReview, setHasReview] = useState(!!props.review);
+
+  async function handleDeleteReview() {
+    await fetch(`https://api-tma-2024-production.up.railway.app/review/${props.review!.id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(response => {
+      console.log(response);
+      if (response.ok) setHasReview(false);
+    });
+  }
 
   return (
     <div className={styles['user-booking']}>
@@ -43,12 +58,12 @@ export function UserBooking(props: UserBookingProps) {
           <p>{props.room}</p>
         </div>
         <div className={styles['buttons-container']}>
-          {props.review ? (
+          {hasReview ? (
             <>
               <Button text={'Edit Review'}
                 onClick={() => navigate(`/review/${props.bookingId}`)} />
               <Button text={'Delete Review'}
-                onClick={() => props.handleDeleteReview!(props.review!.id)} />
+                onClick={handleDeleteReview} />
             </>
           ) : (
             <Button text={'Add Review'}
@@ -56,12 +71,12 @@ export function UserBooking(props: UserBookingProps) {
           )}
         </div>
       </div>
-      {props.review && (
+      {hasReview && (
         <div className={styles.review}>
-          <p>{props.review.comment}</p>
+          <p>{props.review!.comment}</p>
           <div className={styles['review-right']}>
-            <p>{props.review.createdAt.split('T')[0]}</p>
-            <Rating rating={props.review.rating} />
+            <p>{props.review!.createdAt.split('T')[0]}</p>
+            <Rating rating={props.review!.rating} />
           </div>
         </div>
       )}

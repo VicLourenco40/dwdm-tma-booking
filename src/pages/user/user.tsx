@@ -100,19 +100,6 @@ export function User() {
     });
   }
 
-  async function handleDeleteReview(reviewId: string) {
-    await fetch(`https://api-tma-2024-production.up.railway.app/review/${reviewId}`, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-    .then(response => {
-      console.log(response);
-      if (response.ok) getUser();
-    });
-  }
-
   if (loading) return (<Loading />);
 
   if (!user) return (<Message message={'Could not retrieve user'} success={false} />);
@@ -164,8 +151,7 @@ export function User() {
               checkIn={booking.checkIn}
               checkOut={booking.checkOut}
               {...booking.reviews.length > 0 && {
-                review: booking.reviews[0],
-                handleDeleteReview: handleDeleteReview
+                review: booking.reviews[0]
               }}
             />
           ))}
