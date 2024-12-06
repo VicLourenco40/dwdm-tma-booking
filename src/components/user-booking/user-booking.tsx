@@ -60,13 +60,13 @@ export function UserBooking(props: UserBookingProps) {
         <div className={styles['buttons-container']}>
           {hasReview ? (
             <>
-              <Button text={'Edit Review'}
+              <Button text={'Edit review'}
                 onClick={() => navigate(`/review/${props.bookingId}`)} />
-              <Button text={'Delete Review'}
+              <Button text={'Delete review'}
                 onClick={handleDeleteReview} />
             </>
           ) : (
-            <Button text={'Add Review'}
+            <Button text={'Add review'}
               onClick={() => navigate(`/review/${props.bookingId}`)} />
           )}
         </div>

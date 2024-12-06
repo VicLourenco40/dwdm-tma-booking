@@ -95,8 +95,8 @@ export function User() {
     }))
     .then(({response, data}) => {
       console.log(response, data);
-      setMessage({message: data.message, success: response.ok});
       if (response.ok) setUser({...user!, email: changeEmail.email});
+      setMessage({message: data.message, success: response.ok});
     });
   }
 
@@ -134,29 +134,31 @@ export function User() {
           </form>
         </div>
       </div>
-      {message.message && (
+      {!!message.message && (
         <div className={styles['message-container']}>
           <Message message={message.message} success={message.success} />
         </div>
       )}
-      <div className={styles.section}>
-        <h2>Bookings</h2>
-        <div className={styles['bookings-container']}>
-          {bookings.map(booking => (
-            <UserBooking
-              key={booking.id}
-              bookingId={booking.id}
-              hotel={booking.room.hotel.name}
-              room={booking.room.type}
-              checkIn={booking.checkIn}
-              checkOut={booking.checkOut}
-              {...booking.reviews.length > 0 && {
-                review: booking.reviews[0]
-              }}
-            />
-          ))}
+      {bookings.length > 0 && (
+        <div className={styles.section}>
+          <h2>Bookings</h2>
+          <div className={styles['bookings-container']}>
+            {bookings.map(booking => (
+              <UserBooking
+                key={booking.id}
+                bookingId={booking.id}
+                hotel={booking.room.hotel.name}
+                room={booking.room.type}
+                checkIn={booking.checkIn}
+                checkOut={booking.checkOut}
+                {...booking.reviews.length > 0 && {
+                  review: booking.reviews[0]
+                }}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
