@@ -1,47 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import type { Hotel } from '../../types/hotel';
 import { Loading } from '../../components/loading/loading';
 import { Message } from '../../components/message/message';
 import { HotelDetails } from '../../components/hotel-details/hotel-details';
 import { HotelAmenity } from '../../components/hotel-amenity/hotel-amenity';
 import { HotelReview } from '../../components/hotel-review/hotel-review';
 import styles from './hotel.module.css';
-
-type Hotel = {
-  id: string;
-  name: string;
-  description: string;
-  location: string;
-  country: {
-    name: string;
-  };
-  rooms: [{
-    images: [{
-      id: string;
-      url: string;
-    }];
-  }];
-  amenities: [{
-    id: string;
-    name: string;
-  }];
-  reviews: [{
-    id: string;
-    rating: number;
-    comment: string;
-    createdAt: string;
-    booking: {
-      user: {
-        name: string;
-        country: {
-          name: string;
-        };
-      };
-    };
-  }];
-  averageRating: number;
-};
 
 export function Hotel() {
   const {hotelId} = useParams();

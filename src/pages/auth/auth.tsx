@@ -1,16 +1,17 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import type { Country } from '../../types/country';
 import { Loading } from '../../components/loading/loading';
 import { Message } from '../../components/message/message';
 import styles from './auth.module.css';
 
-type SignIn = {
+type SignInRequest = {
   email: string;
   password: string;
 };
 
-type SignUp = {
+type SignUpRequest = {
   name: string;
   email: string;
   password: string;
@@ -19,16 +20,11 @@ type SignUp = {
   terms: boolean;
 };
 
-type Country = {
-  id: string;
-  name: string;
-}
-
 export function Auth() {
   const navigate = useNavigate();
-  const [signIn, setSignIn] = useState<SignIn>({email: '', password: ''});
+  const [signIn, setSignIn] = useState<SignInRequest>({email: '', password: ''});
   const [signInMessage, setSignInMessage] = useState({message: '', success: true});
-  const [signUp, setSignUp] = useState<SignUp>({name: '', email: '', password: '', birth_date: '', country_id: '', terms: false});
+  const [signUp, setSignUp] = useState<SignUpRequest>({name: '', email: '', password: '', birth_date: '', country_id: '', terms: false});
   const [signUpMessage, setSignUpMessage] = useState({message: '', success: true});
   const [countries, setCountries] = useState<Country[]>([]);
   const [loading, setLoading] = useState(true);

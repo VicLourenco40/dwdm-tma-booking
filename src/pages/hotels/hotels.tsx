@@ -1,19 +1,10 @@
 import { useEffect, useState } from 'react';
 
+import { Hotel } from '../../types/hotel';
 import { Loading } from '../../components/loading/loading';
 import { Message } from '../../components/message/message';
 import { HotelCard } from '../../components/hotel-card/hotel-card';
 import styles from './hotels.module.css';
-
-type Hotel = {
-  id: string;
-  name: string;
-  location: string;
-  country: {
-    name: string;
-  };
-  averageReview: number;
-};
 
 export function Hotels() {
   const [hotels, setHotels] = useState<Hotel[]>();

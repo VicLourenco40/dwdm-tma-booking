@@ -1,28 +1,12 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import type { Hotel } from '../../types/hotel';
+import type { Room } from '../../types/room';
 import { Loading } from '../../components/loading/loading';
 import { Message } from '../../components/message/message';
 import { BookingDetails } from '../../components/booking-details/booking-details';
 import styles from './booking.module.css';
-
-type Room = {
-  id: string;
-  type: string;
-  price: number;
-  images: [{
-    url: string;
-  }];
-};
-
-type Hotel = {
-  id: string;
-  name: string;
-  cancellationPolicy: {
-    name: string;
-  };
-  rooms: Room[];
-};
 
 type BookingRequest = {
   roomId: string;

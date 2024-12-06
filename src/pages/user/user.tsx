@@ -1,46 +1,17 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import type { User } from '../../types/user';
+import type { Booking } from '../../types/booking';
 import { Loading } from '../../components/loading/loading';
 import { Message } from '../../components/message/message';
 import { UserDetails } from '../../components/user-details/user-details';
 import { UserBooking } from '../../components/user-booking/user-booking';
 import styles from './user.module.css';
 
-type User = {
-  id: string;
-  name: string;
-  email: string;
-  country: {
-    name: string;
-  };
-  birthDate: string;
-};
-
-type ChangeEmail = {
+type ChangeEmailRequest = {
   email: string;
   password: string;
-};
-
-type Review = {
-  id: string;
-  createdAt: string;
-  rating: number;
-  comment: string;
-};
-
-type Booking = {
-  id: string;
-  checkIn: string;
-  checkOut: string;
-  room: {
-    type: string;
-    hotel: {
-      id: string;
-      name: string;
-    };
-  };
-  reviews: Review[];
 };
 
 export function User() {
@@ -49,7 +20,7 @@ export function User() {
   const [user, setUser] = useState<User>();
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
-  const [changeEmail, setChangeEmail] = useState<ChangeEmail>({email: '', password: ''});
+  const [changeEmail, setChangeEmail] = useState<ChangeEmailRequest>({email: '', password: ''});
   const [message, setMessage] = useState({message: '', success: true});
 
   async function getUser() {
