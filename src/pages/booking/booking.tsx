@@ -76,7 +76,9 @@ export function Booking() {
     });
   }
 
-  function getNextDay(day: string) {
+  function getNextDay(day: string): string {
+    if (!day) return tomorrow;
+
     let nextDay = new Date(day);
     nextDay.setDate(nextDay.getDate() + 1);
     return nextDay.toISOString().slice(0, 10);
