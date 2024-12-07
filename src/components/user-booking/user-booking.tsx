@@ -2,16 +2,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Calendar, CalendarOff } from 'lucide-react';
 
+import type { Review } from '../../types/review';
 import { Button } from '../button/button';
 import { Rating } from '../rating/rating';
 import styles from './user-booking.module.css';
-
-type Review = {
-  id: string;
-  createdAt: string;
-  rating: number;
-  comment: string;
-};
 
 type UserBookingProps = {
   bookingId: string;

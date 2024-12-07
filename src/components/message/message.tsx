@@ -5,7 +5,7 @@ import styles from './message.module.css';
 type MessageProps = {
   message: string;
   success: boolean;
-}
+};
 
 export function Message(props: MessageProps) {
   const icon = props.success ? 'CircleCheck' : 'CircleX'

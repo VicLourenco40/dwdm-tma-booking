@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
-import { Rating } from '../rating/rating';
 import { Button } from '../button/button';
+import { Rating } from '../rating/rating';
 import styles from './hotel-details.module.css';
 
 type HotelDetailsProps = {
