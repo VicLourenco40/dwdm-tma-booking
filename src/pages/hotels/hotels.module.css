@@ -1,7 +1,44 @@
-.hotels-container {
+.container {
   margin: 0 auto;
   width: 100%;
   max-width: 960px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.filters {
+  background-color: var(--blue-dark);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filters input {
+  flex: 2
+}
+
+.filters select {
+  flex: 1;
+}
+
+.filters input, .filters select {
+  color: white;
+  background-color: var(--blue-darker);
+  border: none;
+  padding: 1rem;
+
+  &:hover {
+    filter: brightness(120%);
+  }
+
+  &:active {
+    filter: brightness(80%);
+  }
+}
+
+.hotels-list {
   display: flex;
   flex-direction: column;
   gap: 2rem;
