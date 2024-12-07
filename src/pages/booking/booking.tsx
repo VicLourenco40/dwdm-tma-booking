@@ -5,7 +5,7 @@ import type { Hotel } from '../../types/hotel';
 import type { Room } from '../../types/room';
 import { Loading } from '../../components/loading/loading';
 import { Message } from '../../components/message/message';
-import { BookingDetails } from '../../components/booking-details/booking-details';
+import { RoomDetails } from '../../components/room-details/room-details';
 import styles from './booking.module.css';
 
 type BookingRequest = {
@@ -122,7 +122,7 @@ export function Booking() {
           </form>
         </div>
         <div className={styles['booking-right']}>
-          <BookingDetails
+          <RoomDetails
             cancellationPolicy={hotel.cancellationPolicy.name}
             price={selectedRoom!.price}
             {...selectedRoom!.images.length > 0 && {
