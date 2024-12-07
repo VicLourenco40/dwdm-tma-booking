@@ -5,6 +5,7 @@ import type { User } from '../../types/user';
 import type { Booking } from '../../types/booking';
 import { Loading } from '../../components/loading/loading';
 import { Message } from '../../components/message/message';
+import { Form } from '../../components/form/form';
 import { UserDetails } from '../../components/user-details/user-details';
 import { UserBooking } from '../../components/user-booking/user-booking';
 import styles from './user.module.css';
@@ -89,7 +90,7 @@ export function User() {
         </div>
         <div className={styles.section}>
           <h2>Settings</h2>
-          <form className={styles.form} onSubmit={handleChangeEmail}>
+          <Form onSubmit={handleChangeEmail}>
             <h3>Change email</h3>
             <label htmlFor={'email'}>New Email</label>
             <input type={'email'} name={'email'} id={'email'} required
@@ -101,8 +102,8 @@ export function User() {
               placeholder={'Enter your password'}
               onChange={event => setChangeEmail({...changeEmail, password: event.target.value})} />
 
-            <input className={styles['form-submit']} type={'submit'} value={'Update'} />
-          </form>
+            <input type={'submit'} value={'Update'} />
+          </Form>
         </div>
       </div>
       {!!message.message && (

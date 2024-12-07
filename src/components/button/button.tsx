@@ -2,7 +2,7 @@ import styles from './button.module.css';
 
 type ButtonProps = {
   text: string;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  onClick: () => void;
 }
 
 export function Button(props: ButtonProps) {

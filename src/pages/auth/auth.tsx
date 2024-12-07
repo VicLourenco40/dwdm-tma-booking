@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import type { Country } from '../../types/country';
 import { Loading } from '../../components/loading/loading';
 import { Message } from '../../components/message/message';
+import { Form } from '../../components/form/form';
 import styles from './auth.module.css';
 
 type SignInRequest = {
@@ -108,7 +109,7 @@ export function Auth() {
     <div className={styles.container}>
       <div className={styles['sign-in']}>
         <h2>Sign In</h2>
-        <form className={styles.form} onSubmit={handleSignIn}>
+        <Form onSubmit={handleSignIn}>
           <label htmlFor={'sign-in-email'}>Email</label>
           <input type={'email'} id={'sign-in-email'} name={'sign-in-email'} required
             placeholder={'Enter your email address'}
@@ -119,13 +120,13 @@ export function Auth() {
             placeholder={'Enter your password'}
             onChange={event => setSignIn({...signIn, password: event.target.value})} />
 
-          <input className={styles['form-submit']} type={'submit'} value={'Sign In'} />
-        </form>
+          <input type={'submit'} value={'Sign In'} />
+        </Form>
         {!signInMessage.success && <Message message={signInMessage.message} success={signInMessage.success} />}
       </div>
       <div className={styles['sign-up']}>
         <h2>Sign Up</h2>
-        <form className={styles.form} onSubmit={handleSignUp}>
+        <Form onSubmit={handleSignUp}>
           <label htmlFor={'sign-up-name'}>Name</label>
           <input type={'text'} name={'sign-up-name'} id={'sign-up-name'} required minLength={3}
             placeholder={'Enter your first and last name'}
@@ -154,14 +155,14 @@ export function Auth() {
             ))}
           </select>
 
-          <div className={styles['form-row']}>
+          <div>
             <label htmlFor={'sign-up-terms'}>Terms of service</label>
             <input type={'checkbox'} name={'sign-up-terms'} id={'sign-up-terms'} required
               onChange={event => setSignUp({...signUp, terms: event.target.value === 'on'})} />
           </div>
 
-          <input className={styles['form-submit']} type={'submit'} value={'Sign Up'} />
-        </form>
+          <input type={'submit'} value={'Sign Up'} />
+        </Form>
         {!signUpMessage.success && <Message message={signUpMessage.message} success={signUpMessage.success} />}
       </div>
     </div>

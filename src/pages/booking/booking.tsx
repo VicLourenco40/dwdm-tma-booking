@@ -5,6 +5,7 @@ import type { Hotel } from '../../types/hotel';
 import type { Room } from '../../types/room';
 import { Loading } from '../../components/loading/loading';
 import { Message } from '../../components/message/message';
+import { Form } from '../../components/form/form';
 import { RoomDetails } from '../../components/room-details/room-details';
 import styles from './booking.module.css';
 
@@ -91,14 +92,14 @@ export function Booking() {
       <div className={styles['booking-container']}>
         <div className={styles['booking-left']}>
           <h2>Booking</h2>
-          <form className={styles.form} onSubmit={handleAddBooking}>
+          <Form onSubmit={handleAddBooking}>
             <label htmlFor={'room'}>Room</label>
             <select name={'room'} id={'room'} required
               onChange={event => {
                 setBooking({...booking, roomId: event.target.value});
                 setSelectedRoom(hotel.rooms.find(room => room.id === event.target.value));
               }}
-            >
+              >
               {hotel.rooms.map(room => (
                 <option key={room.id} value={room.id}>{room.type}</option>
               ))}
@@ -110,7 +111,7 @@ export function Booking() {
                 setBooking({...booking, startDate: event.target.value});
                 setMinEndDate(getNextDay(event.target.value));
               }}
-            />
+              />
 
             <label htmlFor={'end-date'}>Check out</label>
             <input type={'date'} name={'end-date'} id={'end-date'} required min={minEndDate}
@@ -118,8 +119,8 @@ export function Booking() {
 
             <div className={styles.spacer} />
 
-            <input className={styles['form-submit']} type={'submit'} value={'Confirm'}/>
-          </form>
+            <input type={'submit'} value={'Confirm'}/>
+          </Form>
         </div>
         <div className={styles['booking-right']}>
           <RoomDetails

@@ -4,9 +4,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import type { Booking } from '../../types/booking';
 import { Loading } from '../../components/loading/loading';
 import { Message } from '../../components/message/message';
+import { Form } from '../../components/form/form';
+import { Rating } from '../../components/rating/rating';
 import { BookingDetails } from '../../components/booking-details/booking-details';
 import styles from './review.module.css';
-import { Rating } from '../../components/rating/rating';
 
 type ReviewRequest = {
   bookingId: string;
@@ -116,10 +117,9 @@ export function Review() {
         </div>
         <div className={styles.section}>
           <h2>Review</h2>
-          <form className={styles.form}
-            onSubmit={reviewId ? handleUpdateReview : handlePostReview}>
+          <Form onSubmit={reviewId ? handleUpdateReview : handlePostReview}>
             <label htmlFor={'rating'}>Rating</label>
-            <div className={styles['form-rating']}>
+            <div>
               <input type={'number'} name={'rating'} id={'rating'} required min={1} max={5}
                 value={review.rating}
                 onChange={event => setReview({...review, rating: Number(event.target.value)})} />
@@ -127,13 +127,13 @@ export function Review() {
             </div>
 
             <label htmlFor={'comment'}>Comment</label>
-            <textarea name={'comment'} id={'comment'} required minLength={10} rows={4}
+            <textarea name={'comment'} id={'comment'} required minLength={10} rows={6}
               value={review.comment}
+              placeholder={'Enter a comment (>10 characters).'}
               onChange={event => setReview({...review, comment: event.target.value})} />
 
-            <input className={styles['form-submit']} type={'submit'}
-              value={reviewId ? 'Edit Review' : 'Add Review'} />
-          </form>
+            <input type={'submit'} value={reviewId ? 'Edit Review' : 'Add Review'} />
+          </Form>
         </div>
       </div>
       {!!message.message && (

@@ -1,0 +1,42 @@
+.form {
+  background-color: var(--blue-dark);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form input, .form select, .form textarea {
+  color: white;
+  background-color: var(--blue-darker);
+  border: none;
+  padding: 1rem;
+
+  &:hover {
+    filter: brightness(120%);
+  }
+
+  &:active {
+    filter: brightness(80%);
+  }
+}
+
+.form textarea {
+  resize: none;
+}
+
+.form input[type=submit] {
+  font-size: 1rem;
+  margin: 0 auto;
+  margin-top: 1rem;
+  padding: 1rem 2rem;
+}
+
+.form div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.form div input[type=number] {
+  flex: 1;
+}
