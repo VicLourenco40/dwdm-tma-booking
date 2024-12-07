@@ -1,16 +1,16 @@
 import { Wallet, BookX } from 'lucide-react';
 
-import styles from './booking-details.module.css';
+import styles from './room-details.module.css';
 
-type BookingDetailsProps = {
+type RoomDetailsProps = {
   cancellationPolicy: string;
   price: number;
   image?: string;
 };
 
-export function BookingDetails(props: BookingDetailsProps) {
+export function RoomDetails(props: RoomDetailsProps) {
   return (
-    <div className={styles['booking-details']}>
+    <div className={styles['room-details']}>
       <div className={styles['image-container']}>
         {!!props.image && (
           <img src={props.image} />
