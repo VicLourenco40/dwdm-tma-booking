@@ -76,9 +76,7 @@ export function Booking() {
     });
   }
 
-  function getNextDay(day: string): string {
-    if (!day) return tomorrow;
-
+  function getNextDay(day: string) {
     let nextDay = new Date(day);
     nextDay.setDate(nextDay.getDate() + 1);
     return nextDay.toISOString().slice(0, 10);
@@ -101,7 +99,7 @@ export function Booking() {
                 setBooking({...booking, roomId: event.target.value});
                 setSelectedRoom(hotel.rooms.find(room => room.id === event.target.value));
               }}
-              >
+            >
               {hotel.rooms.map(room => (
                 <option key={room.id} value={room.id}>{room.type}</option>
               ))}
@@ -111,9 +109,9 @@ export function Booking() {
             <input type={'date'} name={'start-date'} id={'start-date'} required min={tomorrow}
               onChange={event => {
                 setBooking({...booking, startDate: event.target.value});
-                setMinEndDate(getNextDay(event.target.value));
+                setMinEndDate(event.target.value ? getNextDay(event.target.value) : minEndDate);
               }}
-              />
+            />
 
             <label htmlFor={'end-date'}>Check out</label>
             <input type={'date'} name={'end-date'} id={'end-date'} required min={minEndDate}
