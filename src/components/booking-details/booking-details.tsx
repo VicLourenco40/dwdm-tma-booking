@@ -17,8 +17,8 @@ export function BookingDetails(props: BookingDetailsProps) {
         )}
       </div>
       <ul className={styles['details-list']}>
-        <li><Wallet />{props.price}€ per night</li>
-        <li><BookX />{props.cancellationPolicy}</li>
+        <li><Wallet />Price: {props.price}€ per night</li>
+        <li><BookX />Cancellation policy: {props.cancellationPolicy}</li>
       </ul>
     </div>
   );
