@@ -18,6 +18,5 @@ export type Hotel = {
     id: string;
     name: string;
   };
-  averageReview: number;
   averageRating: number;
 };

@@ -82,7 +82,7 @@ export function Hotels() {
               name={hotel.name}
               location={hotel.location}
               country={hotel.country.name}
-              rating={hotel.averageReview}
+              rating={hotel.averageRating}
             />
           ))}
         </div>
